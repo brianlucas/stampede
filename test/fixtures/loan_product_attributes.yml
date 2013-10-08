@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  loan_product_id: 
+  loan_attribute_id: 
+  value: 1
+
+two:
+  loan_product_id: 
+  loan_attribute_id: 
+  value: 1
