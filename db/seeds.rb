@@ -1,32 +1,39 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+LoanAttributeType.create([
+    {id: 1, name: "citizenship", label: "Citizenship" },
+    {id: 2, name: "program-eligible", label: "Program eligible" },
+    {id: 3, name: "degree-eligible-graduate", label: "Degree eligible graduate" },
+    {id: 4, name: "degree-eligible-undergraduate", label: "Degree eligible undergraduate" }
+])
+
 LoanAttribute.create([
-    { id: 1, name: 'citizen', label: 'US Citizen', tags: 'citizenship', unit: '' },
-    { id: 2, name: 'resident', label: 'Pernament Resident Alien', tags: 'citizenship', unit: '' },
-    { id: 3, name: 'non-resident', label: 'Non-resident Alien', tags: 'citizenship', unit: '' },
-    { id: 4, name: 'citizenship-other', label: 'Other', tags: 'citizenship', unit: '' },
+    { id: 1, name: 'citizen', label: 'US Citizen', loan_attribute_type_id: 1, unit: '' },
+    { id: 2, name: 'resident', label: 'Pernament Resident Alien', loan_attribute_type_id: 1, unit: '' },
+    { id: 3, name: 'non-resident', label: 'Non-resident Alien', loan_attribute_type_id: 1, unit: '' },
+    { id: 4, name: 'citizenship-other', label: 'Other', loan_attribute_type_id: 1, unit: '' },
     
-    { id: 5, name: 'certificate', label: 'Certificate', tags: 'program-eligible', unit: '' },
-    { id: 6, name: 'associates', label: "Associate's", tags: 'program-eligible', unit: '' },
-    { id: 7, name: 'bachelors', label: "Bachelor's", tags: 'program-eligible', unit: '' },
-    { id: 8, name: 'masters', label: "Master's", tags: 'program-eligible', unit: '' },
-    { id: 9, name: 'doctorate', label: 'Doctorate', tags: 'program-eligible', unit: '' },
-    { id: 10, name: 'post-doctorate', label: 'Post-Doctorate', tags: 'program-eligible', unit: '' },
+    { id: 5, name: 'certificate', label: 'Certificate', loan_attribute_type_id: 2, unit: '' },
+    { id: 6, name: 'associates', label: "Associate's", loan_attribute_type_id: 2, unit: '' },
+    { id: 7, name: 'bachelors', label: "Bachelor's", loan_attribute_type_id: 2, unit: '' },
+    { id: 8, name: 'masters', label: "Master's", loan_attribute_type_id: 2, unit: '' },
+    { id: 9, name: 'doctorate', label: 'Doctorate', loan_attribute_type_id: 2, unit: '' },
+    { id: 10, name: 'post-doctorate', label: 'Post-Doctorate', loan_attribute_type_id: 2, unit: '' },
     
-    { id: 11, name: 'mba', label: 'MBA', tags: 'degree-eligible graduate', unit: '' },
-    { id: 12, name: 'law', label: 'Law', tags: 'degree-eligible graduate', unit: '' },
-    { id: 13, name: 'medicine', label: 'Medicine', tags: 'degree-eligible graduate', unit: '' },
-    { id: 14, name: 'graduate-business', label: 'Graduate Program - Bussines (not MBA)', tags: 'degree-eligible graduate', unit: '' },
-    { id: 15, name: 'graduate-engineering', label: 'Graduate Program - Engineering', tags: 'degree-eligible graduate', unit: '' },
-    { id: 16, name: 'graduate-dentistry', label: 'Graduate - Dentistry', tags: 'degree-eligible graduate', unit: '' },
-    { id: 17, name: 'graduate-nursing', label: 'Graduate - Nursing', tags: 'degree-eligible graduate', unit: '' },
-    { id: 18, name: 'graduate-pharmacy', label: 'Graduate - Pharmacy', tags: 'degree-eligible graduate', unit: '' },
-    { id: 19, name: 'graduate-other', label: 'Graduate - Other', tags: 'degree-eligible graduate', unit: '' },
+    { id: 11, name: 'mba', label: 'MBA', loan_attribute_type_id: 3, unit: '' },
+    { id: 12, name: 'law', label: 'Law', loan_attribute_type_id: 3, unit: '' },
+    { id: 13, name: 'medicine', label: 'Medicine', loan_attribute_type_id: 3, unit: '' },
+    { id: 14, name: 'graduate-business', label: 'Graduate Program - Bussines (not MBA)', loan_attribute_type_id: 3, unit: '' },
+    { id: 15, name: 'graduate-engineering', label: 'Graduate Program - Engineering', loan_attribute_type_id: 3, unit: '' },
+    { id: 16, name: 'graduate-dentistry', label: 'Graduate - Dentistry', loan_attribute_type_id: 3, unit: '' },
+    { id: 17, name: 'graduate-nursing', label: 'Graduate - Nursing', loan_attribute_type_id: 3, unit: '' },
+    { id: 18, name: 'graduate-pharmacy', label: 'Graduate - Pharmacy', loan_attribute_type_id: 3, unit: '' },
+    { id: 19, name: 'graduate-other', label: 'Graduate - Other', loan_attribute_type_id: 3, unit: '' },
     
-    { id: 20, name: 'accelerated-medical', label: 'Accelerated Medical', tags: 'degree-eligible undergraduate', unit: '' },
-    { id: 21, name: 'allopathic-medicine', label: 'Allopathic Medicine', tags: 'degree-eligible undergraduate', unit: '' },
-    { id: 22, name: 'architecture', label: 'Architecture', tags: 'degree-eligible undergraduate', unit: '' }
+    { id: 20, name: 'accelerated-medical', label: 'Accelerated Medical', loan_attribute_type_id: 4, unit: '' },
+    { id: 21, name: 'allopathic-medicine', label: 'Allopathic Medicine', loan_attribute_type_id: 4, unit: '' },
+    { id: 22, name: 'architecture', label: 'Architecture', loan_attribute_type_id: 4, unit: '' }
   ])
 
 LoanProduct.create([

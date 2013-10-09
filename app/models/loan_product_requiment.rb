@@ -80,6 +80,7 @@ class LoanProductRequiment
   end
   
   def check_attributes_for_product (product_code)
+    # check if attributes have correct values (check in database if exist this attribute)
     loan_product = LoanProduct.find_by_code(product_code)
     return false unless loan_product
     
@@ -92,17 +93,17 @@ class LoanProductRequiment
   def validate_params
     # in this table we have errors for required fileds, can be used later 
     errors = []
-    errors << "citizenship is not set correctly" unless LoanAttribute.get_by_tag("citizenship").map{|at| at.name}.include?(citizenship)
-    errors << "program_eligible is not set correctly" unless LoanAttribute.get_by_tag("program-eligible").map{|at| at.name}.include?(program_eligible)
-    errors << "degree_eligible is not set correctly" unless LoanAttribute.get_by_tag("degree-eligible").map{|at| at.name}.include?(degree_eligible)
+    errors << "citizenship is not set correctly" unless LoanAttributeType.find_by_name("citizenship").loan_attributes.map{|at| at.name}.include?(citizenship)
+    errors << "program_eligible is not set correctly" unless LoanAttributeType.find_by_name("program-eligible").loan_attributes.map{|at| at.name}.include?(program_eligible)
+    errors << "degree_eligible is not set correctly" unless (LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.include?(degree_eligible) or LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.include?(degree_eligible))
     puts errors.join(", ")
     return (errors.count > 0) ? false : true
   end
 
   def show_params_and_passible_values
-    params = "citizenship: " + LoanAttribute.get_by_tag("citizenship").map{|at| at.name}.join(", ") + "\n" \
-    + "program_eligible: " + LoanAttribute.get_by_tag("program-eligible").map{|at| at.name}.join(", ") + "\n" \
-    + "degree_eligible: " + LoanAttribute.get_by_tag("degree-eligible").map{|at| at.name}.join(", ") + "\n"
+    params = "citizenship: " + LoanAttributeType.find_by_name("citizenship").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
+    + "program_eligible: " + LoanAttributeType.find_by_name("program-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
+    + "degree_eligible: " + LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.join(", ") + ", " + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.join(", ") + "\n"
     puts params
   end
   
