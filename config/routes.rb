@@ -1,5 +1,6 @@
 Stampede::Application.routes.draw do
 
+  root :to => 'home#index'
   resources :loan_products
 
   # The priority is based upon order of creation: first created -> highest priority.
