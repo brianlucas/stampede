@@ -1,0 +1,62 @@
+<%= form_for(@loan_product) do |f| %>
+  <% if @loan_product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@loan_product.errors.count, "error") %> prohibited this loan_product from being saved:</h2>
+
+      <ul>
+      <% @loan_product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+
+  <% last_type = 0 %>
+  <% @loan_attributes.each do |a| %>
+    <% unless last_type == a.loan_attribute_type_id %>
+      <h4><%= a.loan_attribute_type.label %></h4>
+        <% last_type = a.loan_attribute_type_id %>
+    <% end %>
+    
+    <div class="field">
+      <% value = @loan_product.loan_product_attributes.find_by_loan_attribute_id(a.id) ? @loan_product_attributes.find_by_loan_attribute_id(a.id).value : "" %>
+      <% if a.loan_attribute_type.field_type == LoanAttributeType::LOGIC %>
+        <%= a.label %>:<br>
+        <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="1" <%= value == 1 ? "checked" : "" %> > <label>1</label> 
+        <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="0" <%= value == 0 ? "checked" : "" %> > <label>0</label>
+      <% end %>
+      <% if a.loan_attribute_type.field_type == LoanAttributeType::NUMBER %>
+        <%= a.label %>:<br>
+        <input type="text" name="loan_product_attributes[<%= a.id %>]" value="<%= value %>" />
+      <% end %>
+      <% if a.loan_attribute_type.field_type == LoanAttributeType::LOAN_TYPE %>
+        <%= a.label %>:<br>
+        <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="1" <%= value == 1 ? "checked" : "" %> > <label>fixed</label> 
+        <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="2" <%= value == 2 ? "checked" : "" %> > <label>variable</label>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if false %>
+  <% @loan_attribute_types.each do |pa| %>
+    <div class="field">
+      <label><%= pa.label %></label>
+      <br/>
+      <select name="loan_product_attributes[<%= pa.name %>][]" multiple>
+        <% pa.loan_attributes.each do |a| %>
+          <option value="<%= a.name %>"><%= a.label %></option>
+      <% end %>
+      </select>
+    </div>
+  <% end %>
+  <% end %>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

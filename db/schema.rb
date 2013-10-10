@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009163936) do
+ActiveRecord::Schema.define(version: 20131010142511) do
 
   create_table "loan_attribute_types", force: true do |t|
     t.string   "name"
     t.string   "label"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "field_type"
   end
 
   create_table "loan_attributes", force: true do |t|

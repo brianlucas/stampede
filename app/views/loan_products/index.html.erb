@@ -1,0 +1,27 @@
+<h1>Listing loan_products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @loan_products.each do |loan_product| %>
+      <tr>
+        <td><%= loan_product.code %></td>
+        <td><%= link_to 'Show', loan_product %></td>
+        <td><%= link_to 'Edit', edit_loan_product_path(loan_product) %></td>
+        <td><%= link_to 'Destroy', loan_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Loan product', new_loan_product_path %>
