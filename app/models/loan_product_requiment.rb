@@ -36,9 +36,18 @@
 
 
 class LoanProductRequiment
+  include ActiveModel::Model
+  extend ActiveModel::Callbacks
+  
+  attr_accessor :loan_product_code, :citizenship, :program_eligible, :degree_eligible, :credit_score, :loan_size, :residence_eligible
+  
+  validates :citizenship, :presence => true
+  validates :program_eligible, :presence => true
+  validates :degree_eligible, :presence => true
+  validates :credit_score, :presence => true
 
   def assign_attributes(values)
-    sanitize_for_mass_assignment(values).each do |k, v|
+    values.each do |k, v|
       send("#{k}=", v)
     end
   end
@@ -61,8 +70,6 @@ class LoanProductRequiment
     @loan_product = LoanProduct.find_by_code(vars.first) if vars.first
   end
   
-  attr_accessor :loan_product_code, :citizenship, :program_eligible, :degree_eligible
-  
   def result
     if validate_params 
       if @loan_product
@@ -82,11 +89,29 @@ class LoanProductRequiment
   def check_attributes_for_product (product_code)
     # check if attributes have correct values (check in database if exist this attribute)
     loan_product = LoanProduct.find_by_code(product_code)
+    # first check if all attributes exist (all attributes are set for this product)
+    return false unless loan_product.loan_product_attributes.count == LoanAttribute.all.count
+      
     return false unless loan_product
     
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(citizenship).id).value == 1
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(program_eligible).id).value == 1
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(degree_eligible).id).value == 1
+    # check if score is grether than limit
+    return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("minimum-credit-score").id).value <= credit_score.to_i
+    # check if degree_eligible is undergraduated and if graduated should be elmininated
+    undergraduated = ["certificate","associates","bachelors"].include?(program_eligible)
+    return false if (!undergraduated or LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(degree_eligible).id).value == 0)
+    # check if loan size in in range depend of borrower is graduated
+    if undergraduated
+      return false unless loan_size.to_i.between?(LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("minimum-undergraduate").id).value,LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("maximum-undergraduate").id).value )
+    else
+      return false unless loan_size.to_i.between?(LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("minimum-graduate").id).value,LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("maximum-graduate").id).value )
+    end
+    
+    return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(residence_eligible).id).value == 1
+    # 
+
     true
   end 
 
@@ -96,6 +121,9 @@ class LoanProductRequiment
     errors << "citizenship is not set correctly" unless LoanAttributeType.find_by_name("citizenship").loan_attributes.map{|at| at.name}.include?(citizenship)
     errors << "program_eligible is not set correctly" unless LoanAttributeType.find_by_name("program-eligible").loan_attributes.map{|at| at.name}.include?(program_eligible)
     errors << "degree_eligible is not set correctly" unless (LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.include?(degree_eligible) or LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.include?(degree_eligible))
+    errors << "credit_score is not set correctly" unless is_num?(credit_score)
+    errors << "loan_size is not set correctly" unless is_num?(loan_size)
+    errors << "residence_eligible is not set correctly" unless LoanAttributeType.find_by_name("residence-eligible").loan_attributes.map{|at| at.name}.include?(residence_eligible)
     puts errors.join(", ")
     return (errors.count > 0) ? false : true
   end
@@ -103,8 +131,56 @@ class LoanProductRequiment
   def show_params_and_passible_values
     params = "citizenship: " + LoanAttributeType.find_by_name("citizenship").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
     + "program_eligible: " + LoanAttributeType.find_by_name("program-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
-    + "degree_eligible: " + LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.join(", ") + ", " + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.join(", ") + "\n"
+    + "degree_eligible: " + LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.join(", ") + ", " + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
+    + "credit_score: (Integer value)\n " \
+    + "loan_size: (Integer value)\n " \
+    + "residence_eligible: " + LoanAttributeType.find_by_name("residence-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n"
     puts params
+  end
+  
+  def self.show_params_and_passible_values
+    params = "citizenship: " + LoanAttributeType.find_by_name("citizenship").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
+    + "program_eligible: " + LoanAttributeType.find_by_name("program-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
+    + "degree_eligible: " + LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.join(", ") + ", " + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
+    + "credit_score: (Integer value)\n " \
+    + "loan_size: (Integer value)\n " \
+    + "residence_eligible: " + LoanAttributeType.find_by_name("residence-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n"
+    puts params
+  end
+  
+  def self.get_attributes
+    @loan_attributes_types = LoanAttributeType.all
+    @full_attributes = []
+    @loan_attributes_types.each do |at|
+       if at.name == "degree-eligible-graduate"
+         @full_attributes << {
+           :name => "degree-eligible", 
+           :label => "Degree Eligible",
+           :filed_type => 1,
+           :attributes => at.loan_attributes.map{|a| {:id => a.id, :name => a.name, :label => a.label}} + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|a| {:id => a.id, :name => a.name, :label => a.label}}
+         }
+       elsif at.name == "degree-eligible-undergraduate"
+         #do not enything, because its in above case
+       else
+         @full_attributes << {
+           :name => at.name, 
+           :label => at.label,
+           :field_type => at.field_type ,
+           :attributes => at.loan_attributes.map{|a| {:id => a.id, :name => a.name, :label => a.label}}
+         }         
+       end
+    end
+    @full_attributes
+  end
+  
+  private
+  
+  def is_num?(str)
+    begin
+      !!Integer(str)
+    rescue ArgumentError, TypeError
+      false
+    end
   end
   
 end

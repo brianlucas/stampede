@@ -1,0 +1,18 @@
+<h1>Stampede Decisioning Dashboard - RESULT</h1>
+
+<% if @product.length > 0  %>
+  <% if @result == "true" %>
+    Product <%= @product %> is eligible.
+  <% elsif %>
+    Product <%= @product %> is NOT eligible.
+  <% end %>
+<% elsif %>
+     <% if @result.is_a? Array  %>
+        List of eligible products: <%= @result.join(", ")  %>
+     <% elsif %>
+        There is no eligible products.
+     <% end %>
+<% end %>
+
+<hr>
+<%= link_to 'Home', root_path %> | <%= link_to 'New search', find_product_path  %>

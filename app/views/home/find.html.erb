@@ -1,0 +1,30 @@
+<h1>Stampede Decisioning Dashboard - Find Eligible Product Form</h1>
+
+<%= form_tag("/result") do %>
+
+<div class="filed">
+  <label>Select product</label>
+  <%= select("loan_product", "code", @loan_products.map {|at| [ at[:code], at[:code] ] }, {include_blank: 'all products'}) %>  
+</div>
+  
+  <% @loan_attributes.each do |a| %>
+    <% unless ["eliminate-undergraduates"].include?(a[:name]) %>
+      <div class="filed">
+        <% if a[:field_type] == 2 %>
+          <label><%= a[:label] %></label>
+          <%= text_field_tag "loan_attribs["+a[:name].gsub("-","_")+"]", nil %>
+        <% elsif a[:field_type] == 3  %>
+          <label><%= a[:label] %></label>
+          <%= select("loan_attribs", a[:name].gsub("-","_"), a[:attributes].map {|at| [ at[:label], at[:name] ] }) %>  
+        <% else %>
+          <label><%= a[:label] %></label>
+          <%= select("loan_attribs", a[:name].gsub("-","_"), a[:attributes].map {|at| [ at[:label], at[:name] ] }) %>  
+        <% end %>
+      </div>
+    <% end %>
+  <%  end %>
+    <%= submit_tag("Check") %>
+<%  end %>
+
+<hr>
+<%= link_to 'Home', root_path %>

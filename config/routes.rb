@@ -1,6 +1,9 @@
 Stampede::Application.routes.draw do
 
   root :to => 'home#index'
+  get 'find' => 'home#find', as: :find_product
+  post 'result' => 'home#result', as: :show_products
+  
   resources :loan_products
 
   # The priority is based upon order of creation: first created -> highest priority.
