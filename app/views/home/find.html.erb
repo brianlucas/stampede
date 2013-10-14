@@ -8,14 +8,16 @@
 </div>
   
   <% @loan_attributes.each do |a| %>
-    <% unless ["eliminate-undergraduates"].include?(a[:name]) %>
+    <% unless ["eliminate-undergraduates","loan-term"].include?(a[:name]) %>
       <div class="filed">
         <% if a[:field_type] == 2 %>
           <label><%= a[:label] %></label>
           <%= text_field_tag "loan_attribs["+a[:name].gsub("-","_")+"]", nil %>
         <% elsif a[:field_type] == 3  %>
-          <label><%= a[:label] %></label>
-          <%= select("loan_attribs", a[:name].gsub("-","_"), a[:attributes].map {|at| [ at[:label], at[:name] ] }) %>  
+          <% if a[:name] == "loan-type"  %>
+            <label>Loan term and type</label>
+            <%= select("loan_attribs", "loan_term_and_type", ["fixed-5-years","fixed-10-years","fixed-15-years","variable"]) %>  
+        <% end  %>
         <% else %>
           <label><%= a[:label] %></label>
           <%= select("loan_attribs", a[:name].gsub("-","_"), a[:attributes].map {|at| [ at[:label], at[:name] ] }) %>  

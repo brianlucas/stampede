@@ -39,7 +39,7 @@ class LoanProductRequiment
   include ActiveModel::Model
   extend ActiveModel::Callbacks
   
-  attr_accessor :loan_product_code, :citizenship, :program_eligible, :degree_eligible, :credit_score, :loan_size, :residence_eligible
+  attr_accessor :loan_product_code, :citizenship, :program_eligible, :degree_eligible, :credit_score, :loan_size, :residence_eligible, :age_requirement, :loan_term_and_type
   
   validates :citizenship, :presence => true
   validates :program_eligible, :presence => true
@@ -110,8 +110,30 @@ class LoanProductRequiment
     end
     
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(residence_eligible).id).value == 1
-    # 
-
+    
+    if residence_eligible == "AL"
+      return false if LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("age-alabama").id).value > age_requirement.to_i
+    elsif residence_eligible == "PR"
+      return false if LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("age-puerto-rico").id).value > age_requirement.to_i
+    elsif residence_eligible == "NE"
+      return false if LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("age-nebraska").id).value > age_requirement.to_i
+    elsif residence_eligible == "MS"
+      return false if LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("age-mississippi").id).value > age_requirement.to_i
+    else
+      return false if LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("age-other").id).value > age_requirement.to_i
+    end
+    
+    # uncomment below when check type need to be checked 
+    #if loan_term_and_type == "fixed-5-years"
+    #  return false unless (LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("loan-term").id).value == 5 and LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("loan-term").id).value == 1)
+    #elsif loan_term_and_type == "fixed-10-years"
+    #  return false unless (LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("loan-term").id).value == 10 and LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("loan-term").id).value == 1)
+    #elsif loan_term_and_type == "fixed-15-years"
+    #  return false unless (LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("loan-term").id).value == 15 and LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("loan-term").id).value == 1)
+    #elsif loan_term_and_type == "variable"
+    #  return false unless (LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("loan-term").id).value == 2)
+    #end
+    
     true
   end 
 
@@ -124,6 +146,8 @@ class LoanProductRequiment
     errors << "credit_score is not set correctly" unless is_num?(credit_score)
     errors << "loan_size is not set correctly" unless is_num?(loan_size)
     errors << "residence_eligible is not set correctly" unless LoanAttributeType.find_by_name("residence-eligible").loan_attributes.map{|at| at.name}.include?(residence_eligible)
+    errors << "age_requirement is not set correctly" unless is_num?(loan_size)
+    #errors << "loan_term_and_type is not set correctly" unless ["fixed-5-years","fixed-10-years","fixed-15-years","variable"].include?(loan_term_and_type)
     puts errors.join(", ")
     return (errors.count > 0) ? false : true
   end
@@ -134,7 +158,9 @@ class LoanProductRequiment
     + "degree_eligible: " + LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.join(", ") + ", " + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
     + "credit_score: (Integer value)\n " \
     + "loan_size: (Integer value)\n " \
-    + "residence_eligible: " + LoanAttributeType.find_by_name("residence-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n"
+    + "residence_eligible: " + LoanAttributeType.find_by_name("residence-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n" \
+    + "age_requirement: (Integer value)\n " \
+    #+ "loan_term_and_type: fixed-5-years, fixed-10-years, fixed-15-years, variable \n" 
     puts params
   end
   
@@ -145,6 +171,8 @@ class LoanProductRequiment
     + "credit_score: (Integer value)\n " \
     + "loan_size: (Integer value)\n " \
     + "residence_eligible: " + LoanAttributeType.find_by_name("residence-eligible").loan_attributes.map{|at| at.name}.join(", ") + "\n"
+    + "age_requirement: (Integer value)\n " \
+    #+ "loan_term_and_type: fixed-5-years, fixed-10-years, fixed-15-years, variable \n" 
     puts params
   end
   
