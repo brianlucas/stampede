@@ -8,7 +8,7 @@
 </div>
   
   <% @loan_attributes.each do |a| %>
-    <% unless ["eliminate-undergraduates","loan-term"].include?(a[:name]) %>
+    <% unless ["eliminate-undergraduates","loan-term","lender-specific-rules"].include?(a[:name]) %>
       <div class="filed">
         <% if a[:field_type] == 2 %>
           <label><%= a[:label] %></label>
@@ -17,7 +17,13 @@
           <% if a[:name] == "loan-type"  %>
             <label>Loan term and type</label>
             <%= select("loan_attribs", "loan_term_and_type", ["fixed-5-years","fixed-10-years","fixed-15-years","variable"]) %>  
-        <% end  %>
+          <% end  %>
+        <% elsif a[:field_type] == 4  %>
+            <label><%= a[:label] %></label>
+            <%= radio_button_tag("loan_attribs["+a[:name].gsub("-","_")+"]", "yes") %>
+            <%= label_tag(:age_yes, "yes") %>
+            <%= radio_button_tag("loan_attribs["+a[:name].gsub("-","_")+"]", "no") %>
+            <%= label_tag(:age_no, "no") %>
         <% else %>
           <label><%= a[:label] %></label>
           <%= select("loan_attribs", a[:name].gsub("-","_"), a[:attributes].map {|at| [ at[:label], at[:name] ] }) %>  

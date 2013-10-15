@@ -11,11 +11,22 @@ LoanAttributeType.create([
     {id: 7, name: "loan-size", label: "Loan Size", field_type: 2 },
     {id: 8, name: "residence-eligible", label: "Residence input", field_type: 1 },
     {id: 9, name: "age-requirement", label: "How old are you?", field_type: 2 },
-    #{id: 10, name: "loan-term", label: "Loan term", field_type: 2 },
-    #{id: 11, name: "loan-type", label: "Loan type", field_type: 3 }
+    {id: 10, name: "loan-term", label: "Loan term", field_type: 2 },
+    {id: 11, name: "loan-type", label: "Loan type", field_type: 3 },
+    {id: 12, name: "lender-specific-rules", label: "Include lander specific rule?", field_type: 1 },
+    {id: 13, name: "is-cosigner", label: "Is there cosigner?", field_type: 4 },
+    {id: 14, name: "is-cosigner-citizen", label: "Is cosigner US citizen?", field_type: 4 },
+    {id: 15, name: "is-employed", label: "Are you employed?", field_type: 4 },
+    {id: 16, name: "annual-income", label: "Whats your annual income?", field_type: 2 },
+    {id: 17, name: "bankruptcy-last-5-years", label: "Have you been bankrupt in the last 5 years?", field_type: 4 },
+    {id: 18, name: "defaulted-loan", label: "Have you ever defaulted on a loan?", field_type: 4 },
+    #{id: 19, name: "minimum-loan-by-states", label: "Minimum loan by states", field_type: 2 },
+   
 ])
+  
 
 LoanAttribute.create([
+
     { id: 1, name: 'citizen', label: 'US Citizen', loan_attribute_type_id: 1, unit: '' },
     { id: 2, name: 'resident', label: 'Pernament Resident Alien', loan_attribute_type_id: 1, unit: '' },
     { id: 3, name: 'non-resident', label: 'Non-resident Alien', loan_attribute_type_id: 1, unit: '' },
@@ -163,9 +174,17 @@ LoanAttribute.create([
     { id: 137, name: 'age-nebraska', label: 'Nebraska', loan_attribute_type_id: 9, unit: 'years' },
     { id: 138, name: 'age-mississippi', label: 'Missisippi', loan_attribute_type_id: 9, unit: 'years' },
     
-    #{ id: 139, name: 'loan-term', label: 'Loan Term', loan_attribute_type_id: 10, unit: '' },
+    { id: 139, name: 'loan-term', label: 'Loan Term', loan_attribute_type_id: 10, unit: '' },
     
-    #{ id: 140, name: 'loan-type', label: 'Loan Type', loan_attribute_type_id: 11, unit: 'years' }
+    { id: 140, name: 'loan-type', label: 'Loan Type', loan_attribute_type_id: 11, unit: 'years' },
+    
+    { id: 141, name: 'cosigner-citizenship', label: 'Co-signer citizenship must be US citizen', loan_attribute_type_id: 12, unit: '' },
+    { id: 142, name: 'employment-required', label: 'Employment required', loan_attribute_type_id: 12, unit: '' },
+    { id: 143, name: 'annual-income-or-cosigner-required', label: 'Annual income above $24000 or co-signer required', loan_attribute_type_id: 12, unit: '' },
+    { id: 144, name: 'bankruptcy-last-5-years', label: 'Cannot bankruptcy last 5 years', loan_attribute_type_id: 12, unit: '' },
+    { id: 145, name: 'defaulted-loan', label: 'Cannot defaulted loan', loan_attribute_type_id: 12, unit: '' },
+    { id: 146, name: 'minimum-loan-arizona-oregon', label: 'Minimum loan size in Arizona and Oregon', loan_attribute_type_id: 12, unit: '' },
+    { id: 147, name: 'minimum-loan-iowa', label: 'Minimum loan size in Iowa', loan_attribute_type_id: 12, unit: '' },
     
 ])
 
@@ -347,9 +366,18 @@ LoanProductAttribute.create([
     {loan_product_id: 1, loan_attribute_id: 137, value: 19},
     {loan_product_id: 1, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 1, loan_attribute_id: 139, value: 10},
+    {loan_product_id: 1, loan_attribute_id: 139, value: 10},
         
-    #{loan_product_id: 1, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 1, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 1, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 1, loan_attribute_id: 142, value: 1},
+    {loan_product_id: 1, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 1, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 1, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 1, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 1, loan_attribute_id: 147, value: 1},
+
     
     ####################################################################################
     ### SFL-2 attributes
@@ -501,9 +529,17 @@ LoanProductAttribute.create([
     {loan_product_id: 2, loan_attribute_id: 137, value: 19},
     {loan_product_id: 2, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 2, loan_attribute_id: 139, value: 5},
+    {loan_product_id: 2, loan_attribute_id: 139, value: 5},
         
-    #{loan_product_id: 2, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 2, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 2, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 2, loan_attribute_id: 142, value: 1},
+    {loan_product_id: 2, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 2, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 2, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 2, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 2, loan_attribute_id: 147, value: 1},
     
     ####################################################################################
     ### SFL-3 attributes
@@ -656,9 +692,17 @@ LoanProductAttribute.create([
     {loan_product_id: 3, loan_attribute_id: 137, value: 19},
     {loan_product_id: 3, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 3, loan_attribute_id: 139, value: 10},
+    {loan_product_id: 3, loan_attribute_id: 139, value: 10},
         
-    #{loan_product_id: 3, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 3, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 3, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 3, loan_attribute_id: 142, value: 1},
+    {loan_product_id: 3, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 3, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 3, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 3, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 3, loan_attribute_id: 147, value: 1},
    
     ####################################################################################
     ### SFL-4 attributes
@@ -811,9 +855,19 @@ LoanProductAttribute.create([
     {loan_product_id: 4, loan_attribute_id: 137, value: 19},
     {loan_product_id: 4, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 4, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 4, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 4, loan_attribute_id: 140, value: 1},    ####################################################################################
+    {loan_product_id: 4, loan_attribute_id: 140, value: 1},    
+    
+    {loan_product_id: 4, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 4, loan_attribute_id: 142, value: 1},
+    {loan_product_id: 4, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 4, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 4, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 4, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 4, loan_attribute_id: 147, value: 1},
+    
+    #####################################################################################
     ### WEL-1 attributes
     ####################################################################################
 
@@ -964,9 +1018,17 @@ LoanProductAttribute.create([
     {loan_product_id: 5, loan_attribute_id: 137, value: 19},
     {loan_product_id: 5, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 5, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 5, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 5, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 5, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 5, loan_attribute_id: 141, value: 1},
+    {loan_product_id: 5, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 5, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 5, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 5, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 5, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 5, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### WEL-2 attributes
@@ -1119,9 +1181,17 @@ LoanProductAttribute.create([
     {loan_product_id: 6, loan_attribute_id: 137, value: 19},
     {loan_product_id: 6, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 6, loan_attribute_id: 139, value: 20},
+    {loan_product_id: 6, loan_attribute_id: 139, value: 20},
         
-    #{loan_product_id: 6, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 6, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 6, loan_attribute_id: 141, value: 1},
+    {loan_product_id: 6, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 6, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 6, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 6, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 6, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 6, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### WEL-3 attributes
@@ -1274,9 +1344,17 @@ LoanProductAttribute.create([
     {loan_product_id: 7, loan_attribute_id: 137, value: 19},
     {loan_product_id: 7, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 7, loan_attribute_id: 139, value: 5},
+    {loan_product_id: 7, loan_attribute_id: 139, value: 5},
         
-    #{loan_product_id: 7, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 7, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 7, loan_attribute_id: 141, value: 1},
+    {loan_product_id: 7, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 7, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 7, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 7, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 7, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 7, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### WEL-4 attributes
@@ -1429,9 +1507,17 @@ LoanProductAttribute.create([
     {loan_product_id: 8, loan_attribute_id: 137, value: 19},
     {loan_product_id: 8, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 8, loan_attribute_id: 139, value: 10},
+    {loan_product_id: 8, loan_attribute_id: 139, value: 10},
         
-    #{loan_product_id: 8, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 8, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 8, loan_attribute_id: 141, value: 1},
+    {loan_product_id: 8, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 8, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 8, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 8, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 8, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 8, loan_attribute_id: 147, value: 0},
    
     ####################################################################################
     ### COM-1 attributes
@@ -1584,9 +1670,17 @@ LoanProductAttribute.create([
     {loan_product_id: 9, loan_attribute_id: 137, value: 19},
     {loan_product_id: 9, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 9, loan_attribute_id: 139, value: 10},
+    {loan_product_id: 9, loan_attribute_id: 139, value: 10},
         
-    #{loan_product_id: 9, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 9, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 9, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 146, value: 1},
+    {loan_product_id: 9, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### DRB-1 attributes
@@ -1739,9 +1833,17 @@ LoanProductAttribute.create([
     {loan_product_id: 10, loan_attribute_id: 137, value: 19},
     {loan_product_id: 10, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 10, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 10, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 10, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 10, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 10, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 147, value: 0},
     
     ####################################################################################
     ### DRB-2 attributes
@@ -1894,9 +1996,17 @@ LoanProductAttribute.create([
     {loan_product_id: 11, loan_attribute_id: 137, value: 19},
     {loan_product_id: 11, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 11, loan_attribute_id: 139, value: 20},
+    {loan_product_id: 11, loan_attribute_id: 139, value: 20},
         
-    #{loan_product_id: 11, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 11, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 11, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### DRB-3 attributes
@@ -2049,9 +2159,17 @@ LoanProductAttribute.create([
     {loan_product_id: 12, loan_attribute_id: 137, value: 19},
     {loan_product_id: 12, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 12, loan_attribute_id: 139, value: 5},
+    {loan_product_id: 12, loan_attribute_id: 139, value: 5},
         
-    #{loan_product_id: 12, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 12, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 12, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 147, value: 0},
 
 	    ####################################################################################
 	    ### DRB-4 attributes
@@ -2204,9 +2322,17 @@ LoanProductAttribute.create([
 	    {loan_product_id: 13, loan_attribute_id: 137, value: 19},
 	    {loan_product_id: 13, loan_attribute_id: 138, value: 21},
 	    
-	    #{loan_product_id: 13, loan_attribute_id: 139, value: 10},
+	    {loan_product_id: 13, loan_attribute_id: 139, value: 10},
 		
-	    #{loan_product_id: 13, loan_attribute_id: 140, value: 1},
+	    {loan_product_id: 13, loan_attribute_id: 140, value: 1},
+      
+      {loan_product_id: 13, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### DRB-5 attributes
@@ -2359,9 +2485,17 @@ LoanProductAttribute.create([
     {loan_product_id: 14, loan_attribute_id: 137, value: 19},
     {loan_product_id: 14, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 14, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 14, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 14, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 14, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 14, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### SUN-1 attributes
@@ -2514,9 +2648,17 @@ LoanProductAttribute.create([
     {loan_product_id: 15, loan_attribute_id: 137, value: 19},
     {loan_product_id: 15, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 15, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 15, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 15, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 15, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 15, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 15, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 15, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 15, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 15, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 15, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 15, loan_attribute_id: 147, value: 0},
     
     ####################################################################################
     ### SUN-2 attributes
@@ -2669,9 +2811,17 @@ LoanProductAttribute.create([
     {loan_product_id: 16, loan_attribute_id: 137, value: 19},
     {loan_product_id: 16, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 16, loan_attribute_id: 139, value: 20},
+    {loan_product_id: 16, loan_attribute_id: 139, value: 20},
         
-    #{loan_product_id: 16, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 16, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 16, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 16, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 16, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 16, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 16, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 16, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 16, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### SUN-3 attributes
@@ -2824,9 +2974,17 @@ LoanProductAttribute.create([
     {loan_product_id: 17, loan_attribute_id: 137, value: 19},
     {loan_product_id: 17, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 17, loan_attribute_id: 139, value: 25},
+    {loan_product_id: 17, loan_attribute_id: 139, value: 25},
         
-    #{loan_product_id: 17, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 17, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 17, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 17, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 17, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 17, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 17, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 17, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 17, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### SUN-4 attributes
@@ -2979,9 +3137,17 @@ LoanProductAttribute.create([
     {loan_product_id: 18, loan_attribute_id: 137, value: 19},
     {loan_product_id: 18, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 18, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 18, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 18, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 18, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 18, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 18, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 18, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 18, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 18, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 18, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 18, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### SUN-5 attributes
@@ -3134,9 +3300,17 @@ LoanProductAttribute.create([
     {loan_product_id: 19, loan_attribute_id: 137, value: 19},
     {loan_product_id: 19, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 19, loan_attribute_id: 139, value: 20},
+    {loan_product_id: 19, loan_attribute_id: 139, value: 20},
         
-    #{loan_product_id: 19, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 19, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 19, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 19, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 19, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 19, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 19, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 19, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 19, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### SUN-6 attributes
@@ -3289,9 +3463,17 @@ LoanProductAttribute.create([
     {loan_product_id: 20, loan_attribute_id: 137, value: 19},
     {loan_product_id: 20, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 20, loan_attribute_id: 139, value: 25},
+    {loan_product_id: 20, loan_attribute_id: 139, value: 25},
         
-    #{loan_product_id: 20, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 20, loan_attribute_id: 140, value: 1},
+    
+    {loan_product_id: 20, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 20, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 20, loan_attribute_id: 143, value: 0},
+    {loan_product_id: 20, loan_attribute_id: 144, value: 0},
+    {loan_product_id: 20, loan_attribute_id: 145, value: 0},
+    {loan_product_id: 20, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 20, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### CUS-1 attributes
@@ -3444,9 +3626,17 @@ LoanProductAttribute.create([
     {loan_product_id: 21, loan_attribute_id: 137, value: 19},
     {loan_product_id: 21, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 21, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 21, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 21, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 21, loan_attribute_id: 140, value: 2},
+    
+    {loan_product_id: 21, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 21, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 21, loan_attribute_id: 143, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 144, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 145, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 21, loan_attribute_id: 147, value: 0},
 
     ####################################################################################
     ### CUS-2 attributes
@@ -3599,11 +3789,16 @@ LoanProductAttribute.create([
     {loan_product_id: 22, loan_attribute_id: 137, value: 19},
     {loan_product_id: 22, loan_attribute_id: 138, value: 21},
     
-    #{loan_product_id: 22, loan_attribute_id: 139, value: 15},
+    {loan_product_id: 22, loan_attribute_id: 139, value: 15},
         
-    #{loan_product_id: 22, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 22, loan_attribute_id: 140, value: 2},
 
-
-
+    {loan_product_id: 22, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 22, loan_attribute_id: 142, value: 0},
+    {loan_product_id: 22, loan_attribute_id: 143, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 144, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 145, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 146, value: 0},
+    {loan_product_id: 22, loan_attribute_id: 147, value: 0},
     
 ])
