@@ -20,7 +20,8 @@ LoanAttributeType.create([
     {id: 16, name: "annual-income", label: "Whats your annual income?", field_type: 2 },
     {id: 17, name: "bankruptcy-last-5-years", label: "Have you been bankrupt in the last 5 years?", field_type: 4 },
     {id: 18, name: "defaulted-loan", label: "Have you ever defaulted on a loan?", field_type: 4 },
-    #{id: 19, name: "minimum-loan-by-states", label: "Minimum loan by states", field_type: 2 },
+    {id: 19, name: "minimum-loan-by-states", label: "Minimum loan by states", field_type: 2 },
+    {id: 20, name: "school", label: "Your school", field_type: 1 },
    
 ])
   
@@ -180,11 +181,25 @@ LoanAttribute.create([
     
     { id: 141, name: 'cosigner-citizenship', label: 'Co-signer citizenship must be US citizen', loan_attribute_type_id: 12, unit: '' },
     { id: 142, name: 'employment-required', label: 'Employment required', loan_attribute_type_id: 12, unit: '' },
-    { id: 143, name: 'annual-income-or-cosigner-required', label: 'Annual income above $24000 or co-signer required', loan_attribute_type_id: 12, unit: '' },
+    { id: 143, name: 'annual-income-or-cosigner-required', label: 'Annual income or co-signer required', loan_attribute_type_id: 12, unit: '' },
     { id: 144, name: 'bankruptcy-last-5-years', label: 'Cannot bankruptcy last 5 years', loan_attribute_type_id: 12, unit: '' },
     { id: 145, name: 'defaulted-loan', label: 'Cannot defaulted loan', loan_attribute_type_id: 12, unit: '' },
     { id: 146, name: 'minimum-loan-arizona-oregon', label: 'Minimum loan size in Arizona and Oregon', loan_attribute_type_id: 12, unit: '' },
     { id: 147, name: 'minimum-loan-iowa', label: 'Minimum loan size in Iowa', loan_attribute_type_id: 12, unit: '' },
+    
+    { id: 148, name: 'annual-income-limit', label: "Income limit for rule", loan_attribute_type_id: 16, unit: '$' },
+    
+    { id: 149, name: 'minimum-loan-size-arizona', label: "Minimum loan size in Arizona", loan_attribute_type_id: 16, unit: '$' },
+    { id: 150, name: 'minimum-loan-size-oregon', label: "Minimum loan size in Oregon", loan_attribute_type_id: 16, unit: '$' },
+    { id: 151, name: 'minimum-loan-size-iowa', label: "Minimum loan size in Iowa", loan_attribute_type_id: 16, unit: '$' },
+    
+    { id: 152, name: '121150-1', label: "Harvard University", loan_attribute_type_id: 20, unit: '' },
+    { id: 153, name: '107363-1', label: "University of Colorado, Boulder", loan_attribute_type_id: 20, unit: '' },
+    { id: 154, name: '151634-1', label: "Stanford University", loan_attribute_type_id: 20, unit: '' },
+    { id: 155, name: '103015-1', label: "University of California, Berkeley", loan_attribute_type_id: 20, unit: '' },
+    { id: 156, name: '120786-2', label: "Boston College at Southern Maine Community College", loan_attribute_type_id: 20, unit: '' },
+    { id: 157, name: '120227-2', label: "Maryland Institute College of Art  at MICA P.L.A.C.E.", loan_attribute_type_id: 20, unit: '' },
+    { id: 158, name: '145761-1', label: "The University of Texas at Brownsville and Texas Southmost College", loan_attribute_type_id: 20, unit: '' },
     
 ])
 
@@ -195,8 +210,6 @@ LoanProduct.create([
     {id: 4, code: "SFL-4"},
     {id: 5, code: "WEL-1"},
     {id: 6, code: "WEL-2"},
-    {id: 7, code: "WEL-3"},
-    {id: 8, code: "WEL-4"},
     {id: 9, code: "COM-1"},
     {id: 10, code: "DRB-1"},
     {id: 11, code: "DRB-1"},
@@ -363,8 +376,8 @@ LoanProductAttribute.create([
     {loan_product_id: 1, loan_attribute_id: 134, value: 18},
     {loan_product_id: 1, loan_attribute_id: 135, value: 19},
     {loan_product_id: 1, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 1, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 1, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 1, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 1, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 1, loan_attribute_id: 139, value: 10},
         
@@ -378,6 +391,19 @@ LoanProductAttribute.create([
     {loan_product_id: 1, loan_attribute_id: 146, value: 0},
     {loan_product_id: 1, loan_attribute_id: 147, value: 1},
 
+    {loan_product_id: 1, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 1, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 1, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 1, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 1, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 1, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 1, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 1, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 1, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 1, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 1, loan_attribute_id: 158, value: 1},
     
     ####################################################################################
     ### SFL-2 attributes
@@ -526,8 +552,8 @@ LoanProductAttribute.create([
     {loan_product_id: 2, loan_attribute_id: 134, value: 18},
     {loan_product_id: 2, loan_attribute_id: 135, value: 19},
     {loan_product_id: 2, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 2, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 2, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 2, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 2, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 2, loan_attribute_id: 139, value: 5},
         
@@ -540,6 +566,20 @@ LoanProductAttribute.create([
     {loan_product_id: 2, loan_attribute_id: 145, value: 0},
     {loan_product_id: 2, loan_attribute_id: 146, value: 0},
     {loan_product_id: 2, loan_attribute_id: 147, value: 1},
+    
+    {loan_product_id: 2, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 2, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 2, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 2, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 2, loan_attribute_id: 152, value: 2},
+    {loan_product_id: 2, loan_attribute_id: 153, value: 2},
+    {loan_product_id: 2, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 2, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 2, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 2, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 2, loan_attribute_id: 158, value: 1},
     
     ####################################################################################
     ### SFL-3 attributes
@@ -689,8 +729,8 @@ LoanProductAttribute.create([
     {loan_product_id: 3, loan_attribute_id: 134, value: 18},
     {loan_product_id: 3, loan_attribute_id: 135, value: 19},
     {loan_product_id: 3, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 3, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 3, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 3, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 3, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 3, loan_attribute_id: 139, value: 10},
         
@@ -703,6 +743,20 @@ LoanProductAttribute.create([
     {loan_product_id: 3, loan_attribute_id: 145, value: 0},
     {loan_product_id: 3, loan_attribute_id: 146, value: 0},
     {loan_product_id: 3, loan_attribute_id: 147, value: 1},
+    
+    {loan_product_id: 3, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 3, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 3, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 3, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 3, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 3, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 3, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 3, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 3, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 3, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 3, loan_attribute_id: 158, value: 1},
    
     ####################################################################################
     ### SFL-4 attributes
@@ -867,6 +921,20 @@ LoanProductAttribute.create([
     {loan_product_id: 4, loan_attribute_id: 146, value: 0},
     {loan_product_id: 4, loan_attribute_id: 147, value: 1},
     
+    {loan_product_id: 4, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 4, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 4, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 4, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 4, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 4, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 4, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 4, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 4, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 4, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 4, loan_attribute_id: 158, value: 1},
+    
     #####################################################################################
     ### WEL-1 attributes
     ####################################################################################
@@ -1015,8 +1083,8 @@ LoanProductAttribute.create([
     {loan_product_id: 5, loan_attribute_id: 134, value: 18},
     {loan_product_id: 5, loan_attribute_id: 135, value: 19},
     {loan_product_id: 5, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 5, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 5, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 5, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 5, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 5, loan_attribute_id: 139, value: 15},
         
@@ -1029,6 +1097,20 @@ LoanProductAttribute.create([
     {loan_product_id: 5, loan_attribute_id: 145, value: 0},
     {loan_product_id: 5, loan_attribute_id: 146, value: 0},
     {loan_product_id: 5, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 5, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 5, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 5, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 5, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 5, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 5, loan_attribute_id: 153, value: 1},
+    {loan_product_id: 5, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 5, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 5, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 5, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 5, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### WEL-2 attributes
@@ -1178,8 +1260,8 @@ LoanProductAttribute.create([
     {loan_product_id: 6, loan_attribute_id: 134, value: 18},
     {loan_product_id: 6, loan_attribute_id: 135, value: 19},
     {loan_product_id: 6, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 6, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 6, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 6, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 6, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 6, loan_attribute_id: 139, value: 20},
         
@@ -1192,333 +1274,21 @@ LoanProductAttribute.create([
     {loan_product_id: 6, loan_attribute_id: 145, value: 0},
     {loan_product_id: 6, loan_attribute_id: 146, value: 0},
     {loan_product_id: 6, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 6, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 6, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 6, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 6, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 6, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 6, loan_attribute_id: 153, value: 1},
+    {loan_product_id: 6, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 6, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 6, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 6, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 6, loan_attribute_id: 158, value: 1},
 
-    ####################################################################################
-    ### WEL-3 attributes
-    ####################################################################################
-
-    {loan_product_id: 7, loan_attribute_id: 1, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 2, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 3, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 4, value: 0},
-    
-    {loan_product_id: 7, loan_attribute_id: 5, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 6, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 7, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 8, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 9, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 10, value: 1},
-    
-    {loan_product_id: 7, loan_attribute_id: 11, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 12, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 13, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 14, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 15, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 16, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 17, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 18, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 19, value: 1},
-    
-    {loan_product_id: 7, loan_attribute_id: 20, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 21, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 22, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 23, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 24, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 25, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 26, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 27, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 28, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 29, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 30, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 31, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 32, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 33, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 34, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 35, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 36, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 37, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 38, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 39, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 40, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 41, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 42, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 43, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 44, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 45, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 46, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 47, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 48, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 49, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 50, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 51, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 52, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 53, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 54, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 55, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 56, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 57, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 58, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 59, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 60, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 61, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 62, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 63, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 64, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 65, value: 1},
-    
-    {loan_product_id: 7, loan_attribute_id: 66, value: 500},
-    
-    {loan_product_id: 7, loan_attribute_id: 67, value: 1},
-    
-    {loan_product_id: 7, loan_attribute_id: 68, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 69, value: 100000},
-    {loan_product_id: 7, loan_attribute_id: 70, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 71, value: 100000},
-    
-    {loan_product_id: 7, loan_attribute_id: 72, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 73, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 74, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 75, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 76, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 77, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 78, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 79, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 80, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 81, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 82, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 83, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 84, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 85, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 86, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 87, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 88, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 89, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 90, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 91, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 92, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 93, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 94, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 95, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 96, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 97, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 98, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 99, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 100, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 101, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 102, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 103, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 104, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 105, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 106, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 107, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 108, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 109, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 110, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 111, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 112, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 113, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 114, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 115, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 116, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 117, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 118, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 119, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 120, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 121, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 122, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 123, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 124, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 125, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 126, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 127, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 128, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 129, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 130, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 131, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 132, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 133, value: 1},
-    
-    {loan_product_id: 7, loan_attribute_id: 134, value: 18},
-    {loan_product_id: 7, loan_attribute_id: 135, value: 19},
-    {loan_product_id: 7, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 7, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 7, loan_attribute_id: 138, value: 21},
-    
-    {loan_product_id: 7, loan_attribute_id: 139, value: 5},
-        
-    {loan_product_id: 7, loan_attribute_id: 140, value: 1},
-    
-    {loan_product_id: 7, loan_attribute_id: 141, value: 1},
-    {loan_product_id: 7, loan_attribute_id: 142, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 143, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 144, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 145, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 146, value: 0},
-    {loan_product_id: 7, loan_attribute_id: 147, value: 0},
-
-    ####################################################################################
-    ### WEL-4 attributes
-    ####################################################################################
-
-    {loan_product_id: 8, loan_attribute_id: 1, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 2, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 3, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 4, value: 0},
-    
-    {loan_product_id: 8, loan_attribute_id: 5, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 6, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 7, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 8, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 9, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 10, value: 1},
-    
-    {loan_product_id: 8, loan_attribute_id: 11, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 12, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 13, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 14, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 15, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 16, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 17, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 18, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 19, value: 1},
-    
-    {loan_product_id: 8, loan_attribute_id: 20, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 21, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 22, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 23, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 24, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 25, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 26, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 27, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 28, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 29, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 30, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 31, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 32, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 33, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 34, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 35, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 36, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 37, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 38, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 39, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 40, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 41, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 42, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 43, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 44, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 45, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 46, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 47, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 48, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 49, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 50, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 51, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 52, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 53, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 54, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 55, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 56, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 57, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 58, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 59, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 60, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 61, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 62, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 63, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 64, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 65, value: 1},
-    
-    {loan_product_id: 8, loan_attribute_id: 66, value: 500},
-    
-    {loan_product_id: 8, loan_attribute_id: 67, value: 1},
-    
-    {loan_product_id: 8, loan_attribute_id: 68, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 69, value: 100000},
-    {loan_product_id: 8, loan_attribute_id: 70, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 71, value: 100000},
-    
-    {loan_product_id: 8, loan_attribute_id: 72, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 73, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 74, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 75, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 76, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 77, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 78, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 79, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 80, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 81, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 82, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 83, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 84, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 85, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 86, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 87, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 88, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 89, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 90, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 91, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 92, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 93, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 94, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 95, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 96, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 97, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 98, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 99, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 100, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 101, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 102, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 103, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 104, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 105, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 106, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 107, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 108, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 109, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 110, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 111, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 112, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 113, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 114, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 115, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 116, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 117, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 118, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 119, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 120, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 121, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 122, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 123, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 124, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 125, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 126, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 127, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 128, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 129, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 130, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 131, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 132, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 133, value: 1},
-    
-    {loan_product_id: 8, loan_attribute_id: 134, value: 18},
-    {loan_product_id: 8, loan_attribute_id: 135, value: 19},
-    {loan_product_id: 8, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 8, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 8, loan_attribute_id: 138, value: 21},
-    
-    {loan_product_id: 8, loan_attribute_id: 139, value: 10},
-        
-    {loan_product_id: 8, loan_attribute_id: 140, value: 1},
-    
-    {loan_product_id: 8, loan_attribute_id: 141, value: 1},
-    {loan_product_id: 8, loan_attribute_id: 142, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 143, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 144, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 145, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 146, value: 0},
-    {loan_product_id: 8, loan_attribute_id: 147, value: 0},
-   
     ####################################################################################
     ### COM-1 attributes
     ####################################################################################
@@ -1667,8 +1437,8 @@ LoanProductAttribute.create([
     {loan_product_id: 9, loan_attribute_id: 134, value: 18},
     {loan_product_id: 9, loan_attribute_id: 135, value: 19},
     {loan_product_id: 9, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 9, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 9, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 9, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 9, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 9, loan_attribute_id: 139, value: 10},
         
@@ -1681,6 +1451,20 @@ LoanProductAttribute.create([
     {loan_product_id: 9, loan_attribute_id: 145, value: 0},
     {loan_product_id: 9, loan_attribute_id: 146, value: 1},
     {loan_product_id: 9, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 9, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 9, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 9, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 9, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 9, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 154, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 9, loan_attribute_id: 156, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 157, value: 0},
+    {loan_product_id: 9, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### DRB-1 attributes
@@ -1830,8 +1614,8 @@ LoanProductAttribute.create([
     {loan_product_id: 10, loan_attribute_id: 134, value: 18},
     {loan_product_id: 10, loan_attribute_id: 135, value: 19},
     {loan_product_id: 10, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 10, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 10, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 10, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 10, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 10, loan_attribute_id: 139, value: 15},
         
@@ -1844,6 +1628,20 @@ LoanProductAttribute.create([
     {loan_product_id: 10, loan_attribute_id: 145, value: 0},
     {loan_product_id: 10, loan_attribute_id: 146, value: 0},
     {loan_product_id: 10, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 10, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 10, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 10, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 10, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 10, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 154, value: 0},
+    {loan_product_id: 10, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 10, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 10, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 10, loan_attribute_id: 158, value: 1},
     
     ####################################################################################
     ### DRB-2 attributes
@@ -1993,8 +1791,8 @@ LoanProductAttribute.create([
     {loan_product_id: 11, loan_attribute_id: 134, value: 18},
     {loan_product_id: 11, loan_attribute_id: 135, value: 19},
     {loan_product_id: 11, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 11, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 11, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 11, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 11, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 11, loan_attribute_id: 139, value: 20},
         
@@ -2007,6 +1805,20 @@ LoanProductAttribute.create([
     {loan_product_id: 11, loan_attribute_id: 145, value: 0},
     {loan_product_id: 11, loan_attribute_id: 146, value: 0},
     {loan_product_id: 11, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 11, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 11, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 11, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 11, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 11, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 154, value: 0},
+    {loan_product_id: 11, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 11, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 11, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 11, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### DRB-3 attributes
@@ -2156,8 +1968,8 @@ LoanProductAttribute.create([
     {loan_product_id: 12, loan_attribute_id: 134, value: 18},
     {loan_product_id: 12, loan_attribute_id: 135, value: 19},
     {loan_product_id: 12, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 12, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 12, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 12, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 12, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 12, loan_attribute_id: 139, value: 5},
         
@@ -2170,169 +1982,197 @@ LoanProductAttribute.create([
     {loan_product_id: 12, loan_attribute_id: 145, value: 0},
     {loan_product_id: 12, loan_attribute_id: 146, value: 0},
     {loan_product_id: 12, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 12, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 12, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 12, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 12, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 12, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 154, value: 0},
+    {loan_product_id: 12, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 12, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 12, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 12, loan_attribute_id: 158, value: 1},
 
-	    ####################################################################################
-	    ### DRB-4 attributes
-	    ####################################################################################
+	  ####################################################################################
+	  ### DRB-4 attributes
+	  ####################################################################################
 
-	    {loan_product_id: 13, loan_attribute_id: 1, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 2, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 3, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 4, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 1, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 2, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 3, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 4, value: 0},
 	    
-	    {loan_product_id: 13, loan_attribute_id: 5, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 6, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 7, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 8, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 9, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 10, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 5, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 6, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 7, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 8, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 9, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 10, value: 1},
 	    
-	    {loan_product_id: 13, loan_attribute_id: 11, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 12, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 13, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 14, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 15, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 16, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 17, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 18, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 19, value: 0},
-	    
-	    {loan_product_id: 13, loan_attribute_id: 20, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 21, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 22, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 23, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 24, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 25, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 26, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 27, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 28, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 29, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 30, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 31, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 32, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 33, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 34, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 35, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 36, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 37, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 38, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 39, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 40, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 41, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 42, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 43, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 44, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 45, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 46, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 47, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 48, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 49, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 50, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 51, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 52, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 53, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 54, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 55, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 56, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 57, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 58, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 59, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 60, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 61, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 62, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 63, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 64, value: 0},
-	    {loan_product_id: 13, loan_attribute_id: 65, value: 0},
-	    
-	    {loan_product_id: 13, loan_attribute_id: 66, value: 500},
-	    
-	    {loan_product_id: 13, loan_attribute_id: 67, value: 0},
-	    
-	    {loan_product_id: 13, loan_attribute_id: 68, value: 5000},
-	    {loan_product_id: 13, loan_attribute_id: 69, value: 10000000},
-	    {loan_product_id: 13, loan_attribute_id: 70, value: 5000},
-	    {loan_product_id: 13, loan_attribute_id: 71, value: 10000000},
-	    
-	    {loan_product_id: 13, loan_attribute_id: 72, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 73, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 74, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 75, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 76, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 77, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 78, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 79, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 80, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 81, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 82, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 83, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 84, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 85, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 86, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 87, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 88, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 89, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 90, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 91, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 92, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 93, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 94, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 95, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 96, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 97, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 98, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 99, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 100, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 101, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 102, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 103, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 104, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 105, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 106, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 107, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 108, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 109, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 110, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 111, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 112, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 113, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 114, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 115, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 116, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 117, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 118, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 119, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 120, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 121, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 122, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 123, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 124, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 125, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 126, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 127, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 128, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 129, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 130, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 131, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 132, value: 1},
-	    {loan_product_id: 13, loan_attribute_id: 133, value: 1},
-	    
-	    {loan_product_id: 13, loan_attribute_id: 134, value: 18},
-	    {loan_product_id: 13, loan_attribute_id: 135, value: 19},
-	    {loan_product_id: 13, loan_attribute_id: 136, value: 21},
-	    {loan_product_id: 13, loan_attribute_id: 137, value: 19},
-	    {loan_product_id: 13, loan_attribute_id: 138, value: 21},
-	    
-	    {loan_product_id: 13, loan_attribute_id: 139, value: 10},
+	  {loan_product_id: 13, loan_attribute_id: 11, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 12, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 13, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 14, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 15, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 16, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 17, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 18, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 19, value: 0},
+	  
+	  {loan_product_id: 13, loan_attribute_id: 20, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 21, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 22, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 23, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 24, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 25, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 26, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 27, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 28, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 29, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 30, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 31, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 32, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 33, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 34, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 35, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 36, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 37, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 38, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 39, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 40, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 41, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 42, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 43, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 44, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 45, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 46, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 47, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 48, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 49, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 50, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 51, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 52, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 53, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 54, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 55, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 56, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 57, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 58, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 59, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 60, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 61, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 62, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 63, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 64, value: 0},
+	  {loan_product_id: 13, loan_attribute_id: 65, value: 0},
+	  
+	  {loan_product_id: 13, loan_attribute_id: 66, value: 500},
+	  
+	  {loan_product_id: 13, loan_attribute_id: 67, value: 0},
+	   
+	  {loan_product_id: 13, loan_attribute_id: 68, value: 5000},
+	  {loan_product_id: 13, loan_attribute_id: 69, value: 10000000},
+	  {loan_product_id: 13, loan_attribute_id: 70, value: 5000},
+	  {loan_product_id: 13, loan_attribute_id: 71, value: 10000000},
+	  
+	  {loan_product_id: 13, loan_attribute_id: 72, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 73, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 74, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 75, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 76, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 77, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 78, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 79, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 80, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 81, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 82, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 83, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 84, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 85, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 86, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 87, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 88, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 89, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 90, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 91, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 92, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 93, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 94, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 95, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 96, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 97, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 98, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 99, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 100, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 101, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 102, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 103, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 104, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 105, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 106, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 107, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 108, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 109, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 110, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 111, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 112, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 113, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 114, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 115, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 116, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 117, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 118, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 119, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 120, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 121, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 122, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 123, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 124, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 125, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 126, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 127, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 128, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 129, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 130, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 131, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 132, value: 1},
+	  {loan_product_id: 13, loan_attribute_id: 133, value: 1},
+	  
+	  {loan_product_id: 13, loan_attribute_id: 134, value: 18},
+	  {loan_product_id: 13, loan_attribute_id: 135, value: 19},
+	  {loan_product_id: 13, loan_attribute_id: 136, value: 21},
+	  {loan_product_id: 13, loan_attribute_id: 137, value: 18},
+	  {loan_product_id: 13, loan_attribute_id: 138, value: 18},
+	   
+	  {loan_product_id: 13, loan_attribute_id: 139, value: 10},
 		
-	    {loan_product_id: 13, loan_attribute_id: 140, value: 1},
+    {loan_product_id: 13, loan_attribute_id: 140, value: 1},
       
-      {loan_product_id: 13, loan_attribute_id: 141, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 141, value: 0},
     {loan_product_id: 13, loan_attribute_id: 142, value: 0},
     {loan_product_id: 13, loan_attribute_id: 143, value: 0},
     {loan_product_id: 13, loan_attribute_id: 144, value: 0},
     {loan_product_id: 13, loan_attribute_id: 145, value: 0},
     {loan_product_id: 13, loan_attribute_id: 146, value: 0},
     {loan_product_id: 13, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 13, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 13, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 13, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 13, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 13, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 154, value: 0},
+    {loan_product_id: 13, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 13, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 13, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 13, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### DRB-5 attributes
@@ -2482,8 +2322,8 @@ LoanProductAttribute.create([
     {loan_product_id: 14, loan_attribute_id: 134, value: 18},
     {loan_product_id: 14, loan_attribute_id: 135, value: 19},
     {loan_product_id: 14, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 14, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 14, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 14, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 14, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 14, loan_attribute_id: 139, value: 15},
         
@@ -2496,6 +2336,20 @@ LoanProductAttribute.create([
     {loan_product_id: 14, loan_attribute_id: 145, value: 0},
     {loan_product_id: 14, loan_attribute_id: 146, value: 0},
     {loan_product_id: 14, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 14, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 14, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 14, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 14, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 14, loan_attribute_id: 152, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 154, value: 0},
+    {loan_product_id: 14, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 14, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 14, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 14, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### SUN-1 attributes
@@ -2645,7 +2499,7 @@ LoanProductAttribute.create([
     {loan_product_id: 15, loan_attribute_id: 134, value: 18},
     {loan_product_id: 15, loan_attribute_id: 135, value: 19},
     {loan_product_id: 15, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 15, loan_attribute_id: 137, value: 19},
+    {loan_product_id: 15, loan_attribute_id: 137, value: 18},
     {loan_product_id: 15, loan_attribute_id: 138, value: 21},
     
     {loan_product_id: 15, loan_attribute_id: 139, value: 15},
@@ -2659,6 +2513,20 @@ LoanProductAttribute.create([
     {loan_product_id: 15, loan_attribute_id: 145, value: 0},
     {loan_product_id: 15, loan_attribute_id: 146, value: 0},
     {loan_product_id: 15, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 15, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 15, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 15, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 15, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 15, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 15, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 15, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 15, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 15, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 15, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 15, loan_attribute_id: 158, value: 1},
     
     ####################################################################################
     ### SUN-2 attributes
@@ -2808,7 +2676,7 @@ LoanProductAttribute.create([
     {loan_product_id: 16, loan_attribute_id: 134, value: 18},
     {loan_product_id: 16, loan_attribute_id: 135, value: 19},
     {loan_product_id: 16, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 16, loan_attribute_id: 137, value: 19},
+    {loan_product_id: 16, loan_attribute_id: 137, value: 18},
     {loan_product_id: 16, loan_attribute_id: 138, value: 21},
     
     {loan_product_id: 16, loan_attribute_id: 139, value: 20},
@@ -2823,6 +2691,20 @@ LoanProductAttribute.create([
     {loan_product_id: 16, loan_attribute_id: 146, value: 0},
     {loan_product_id: 16, loan_attribute_id: 147, value: 0},
 
+    {loan_product_id: 16, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 16, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 16, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 16, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 16, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 16, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 16, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 16, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 16, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 16, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 16, loan_attribute_id: 158, value: 1},
+    
     ####################################################################################
     ### SUN-3 attributes
     ####################################################################################
@@ -2971,7 +2853,7 @@ LoanProductAttribute.create([
     {loan_product_id: 17, loan_attribute_id: 134, value: 18},
     {loan_product_id: 17, loan_attribute_id: 135, value: 19},
     {loan_product_id: 17, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 17, loan_attribute_id: 137, value: 19},
+    {loan_product_id: 17, loan_attribute_id: 137, value: 18},
     {loan_product_id: 17, loan_attribute_id: 138, value: 21},
     
     {loan_product_id: 17, loan_attribute_id: 139, value: 25},
@@ -2985,6 +2867,20 @@ LoanProductAttribute.create([
     {loan_product_id: 17, loan_attribute_id: 145, value: 0},
     {loan_product_id: 17, loan_attribute_id: 146, value: 0},
     {loan_product_id: 17, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 17, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 17, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 17, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 17, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 17, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 17, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 17, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 17, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 17, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 17, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 17, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### SUN-4 attributes
@@ -3134,7 +3030,7 @@ LoanProductAttribute.create([
     {loan_product_id: 18, loan_attribute_id: 134, value: 18},
     {loan_product_id: 18, loan_attribute_id: 135, value: 19},
     {loan_product_id: 18, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 18, loan_attribute_id: 137, value: 19},
+    {loan_product_id: 18, loan_attribute_id: 137, value: 18},
     {loan_product_id: 18, loan_attribute_id: 138, value: 21},
     
     {loan_product_id: 18, loan_attribute_id: 139, value: 15},
@@ -3148,6 +3044,20 @@ LoanProductAttribute.create([
     {loan_product_id: 18, loan_attribute_id: 145, value: 0},
     {loan_product_id: 18, loan_attribute_id: 146, value: 0},
     {loan_product_id: 18, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 18, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 18, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 18, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 18, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 18, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 18, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 18, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 18, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 18, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 18, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 18, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### SUN-5 attributes
@@ -3297,7 +3207,7 @@ LoanProductAttribute.create([
     {loan_product_id: 19, loan_attribute_id: 134, value: 18},
     {loan_product_id: 19, loan_attribute_id: 135, value: 19},
     {loan_product_id: 19, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 19, loan_attribute_id: 137, value: 19},
+    {loan_product_id: 19, loan_attribute_id: 137, value: 18},
     {loan_product_id: 19, loan_attribute_id: 138, value: 21},
     
     {loan_product_id: 19, loan_attribute_id: 139, value: 20},
@@ -3311,6 +3221,20 @@ LoanProductAttribute.create([
     {loan_product_id: 19, loan_attribute_id: 145, value: 0},
     {loan_product_id: 19, loan_attribute_id: 146, value: 0},
     {loan_product_id: 19, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 19, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 19, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 19, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 19, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 19, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 19, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 19, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 19, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 19, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 19, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 19, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### SUN-6 attributes
@@ -3460,7 +3384,7 @@ LoanProductAttribute.create([
     {loan_product_id: 20, loan_attribute_id: 134, value: 18},
     {loan_product_id: 20, loan_attribute_id: 135, value: 19},
     {loan_product_id: 20, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 20, loan_attribute_id: 137, value: 19},
+    {loan_product_id: 20, loan_attribute_id: 137, value: 18},
     {loan_product_id: 20, loan_attribute_id: 138, value: 21},
     
     {loan_product_id: 20, loan_attribute_id: 139, value: 25},
@@ -3474,6 +3398,20 @@ LoanProductAttribute.create([
     {loan_product_id: 20, loan_attribute_id: 145, value: 0},
     {loan_product_id: 20, loan_attribute_id: 146, value: 0},
     {loan_product_id: 20, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 20, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 20, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 20, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 20, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 21, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 153, value: 0},
+    {loan_product_id: 21, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 21, loan_attribute_id: 158, value: 1},
 
     ####################################################################################
     ### CUS-1 attributes
@@ -3623,8 +3561,8 @@ LoanProductAttribute.create([
     {loan_product_id: 21, loan_attribute_id: 134, value: 18},
     {loan_product_id: 21, loan_attribute_id: 135, value: 19},
     {loan_product_id: 21, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 21, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 21, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 21, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 21, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 21, loan_attribute_id: 139, value: 15},
         
@@ -3637,6 +3575,12 @@ LoanProductAttribute.create([
     {loan_product_id: 21, loan_attribute_id: 145, value: 1},
     {loan_product_id: 21, loan_attribute_id: 146, value: 0},
     {loan_product_id: 21, loan_attribute_id: 147, value: 0},
+    
+    {loan_product_id: 21, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 21, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 21, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 21, loan_attribute_id: 151, value: 50000},
 
     ####################################################################################
     ### CUS-2 attributes
@@ -3786,8 +3730,8 @@ LoanProductAttribute.create([
     {loan_product_id: 22, loan_attribute_id: 134, value: 18},
     {loan_product_id: 22, loan_attribute_id: 135, value: 19},
     {loan_product_id: 22, loan_attribute_id: 136, value: 21},
-    {loan_product_id: 22, loan_attribute_id: 137, value: 19},
-    {loan_product_id: 22, loan_attribute_id: 138, value: 21},
+    {loan_product_id: 22, loan_attribute_id: 137, value: 18},
+    {loan_product_id: 22, loan_attribute_id: 138, value: 18},
     
     {loan_product_id: 22, loan_attribute_id: 139, value: 15},
         
@@ -3801,4 +3745,17 @@ LoanProductAttribute.create([
     {loan_product_id: 22, loan_attribute_id: 146, value: 0},
     {loan_product_id: 22, loan_attribute_id: 147, value: 0},
     
+    {loan_product_id: 22, loan_attribute_id: 148, value: 24000},
+    
+    {loan_product_id: 22, loan_attribute_id: 149, value: 10001},
+    {loan_product_id: 22, loan_attribute_id: 150, value: 50001},
+    {loan_product_id: 22, loan_attribute_id: 151, value: 50000},
+    
+    {loan_product_id: 22, loan_attribute_id: 152, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 153, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 154, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 155, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 156, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 157, value: 1},
+    {loan_product_id: 22, loan_attribute_id: 158, value: 1},
 ])

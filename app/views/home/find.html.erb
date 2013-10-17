@@ -8,7 +8,7 @@
 </div>
   
   <% @loan_attributes.each do |a| %>
-    <% unless ["eliminate-undergraduates","loan-term","lender-specific-rules"].include?(a[:name]) %>
+    <% unless ["eliminate-undergraduates","loan-term","lender-specific-rules","minimum-loan-by-states"].include?(a[:name]) %>
       <div class="filed">
         <% if a[:field_type] == 2 %>
           <label><%= a[:label] %></label>
