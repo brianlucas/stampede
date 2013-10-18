@@ -22,6 +22,7 @@ LoanAttributeType.create([
     {id: 18, name: "defaulted-loan", label: "Have you ever defaulted on a loan?", field_type: 4 },
     {id: 19, name: "minimum-loan-by-states", label: "Minimum loan by states", field_type: 2 },
     {id: 20, name: "school", label: "Your school", field_type: 1 },
+    {id: 21, name: "graduate-date", label: "Graduate date (format: YYYY-MM-DD)", field_type: 2 },
    
 ])
   
@@ -212,10 +213,10 @@ LoanProduct.create([
     {id: 6, code: "WEL-2"},
     {id: 9, code: "COM-1"},
     {id: 10, code: "DRB-1"},
-    {id: 11, code: "DRB-1"},
-    {id: 12, code: "DRB-1"},
-    {id: 13, code: "DRB-1"},
-    {id: 14, code: "DRB-1"},
+    {id: 11, code: "DRB-2"},
+    {id: 12, code: "DRB-3"},
+    {id: 13, code: "DRB-4"},
+    {id: 14, code: "DRB-5"},
     {id: 15, code: "SUN-1"},
     {id: 16, code: "SUN-2"},
     {id: 17, code: "SUN-3"},

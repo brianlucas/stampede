@@ -39,7 +39,7 @@ class LoanProductRequiment
   include ActiveModel::Model
   extend ActiveModel::Callbacks
   
-  attr_accessor :loan_product_code, :citizenship, :program_eligible, :degree_eligible, :credit_score, :loan_size, :residence_eligible, :age_requirement, :loan_term_and_type, :is_cosigner, :is_cosigner_citizen, :is_employed, :annual_income, :bankruptcy_last_5_years, :defaulted_loan, :school
+  attr_accessor :loan_product_code, :citizenship, :program_eligible, :degree_eligible, :credit_score, :loan_size, :residence_eligible, :age_requirement, :loan_term_and_type, :is_cosigner, :is_cosigner_citizen, :is_employed, :annual_income, :bankruptcy_last_5_years, :defaulted_loan, :school, :graduate_date
   
   validates :citizenship, :presence => true
   validates :program_eligible, :presence => true
@@ -92,6 +92,9 @@ class LoanProductRequiment
     # first check if all attributes exist (all attributes are set for this product)
     return false unless loan_product
     return false unless loan_product.loan_product_attributes.count == LoanAttribute.all.count
+    
+    # check if graduate date is in past (if in the future then reject)
+    return false if begin Date.parse(graduate_date) > Date.today rescue true end
       
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(citizenship).id).value == 1
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(program_eligible).id).value == 1
