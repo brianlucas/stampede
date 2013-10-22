@@ -11,10 +11,173 @@
     </div>
   <% end %>
 
+  <h2>Loan Information</h2>
+
   <div class="field">
     <%= f.label :code %><br>
     <%= f.text_field :code %>
   </div>
+
+  <div class="field">
+    <%= f.label :name %><br>1
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :enabled %><br>
+    <%= f.label "yes" %>
+    <%= f.radio_button :enabled, 1 %>
+    <%= f.label "no" %>
+    <%= f.radio_button :enabled, 0 %>    
+  </div>
+
+  <h4>General information</h4>
+
+  <div class="field">
+    <%= f.label "Lender" %><br>
+    <%= f.select(:loan_lender_id, LoanLender.all.map{|l| [l.name,l.id] }) %>  
+  </div>
+
+  <div class="field">
+    <%= f.label "Servicer" %><br>
+    <%= f.select(:loan_lender_id, LoanServicer.all.map{|l| [l.name,l.id] }) %>  
+  </div>
+
+  <div class="field">
+    <%= f.label :slug %><br>
+    <%= f.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= f.label :logo %><br>
+    <%= f.text_field :logo %>
+    <% if @loan_product.logo and @loan_product.logo.length > 0 %>
+    <br/><img src="<%=@loan_product.logo%>" alt="" height="200" />
+    <% end  %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Co-signer release available" %><br>
+    <%= f.text_field :cosigner_release_available %> months
+  </div>
+  
+  <div class="field">
+    <%= f.label "Co-signer release note" %><br>
+    <%= f.text_area :cosigner_release_available %>
+  </div>
+
+  <div class="field">
+    <%= f.label :external_url %><br>
+    <%= f.text_field :external_url %>
+  </div>
+  
+  <h4>Financial summary</h4>
+  
+  <div class="field">
+    <label>Interest rate type</label><br>
+    <a href="#label-loan-type">here...</a>
+  </div>
+  
+  <div class="field">
+    <%= f.label :auto_debit_discount %><br>
+    <%= f.text_field :auto_debit_discount %> %
+  </div>
+  
+  <div class="field">
+    <%= f.label :auto_debit_discount_note %><br>
+    <%= f.text_area :auto_debit_discount_note %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :loyality_discount %><br>
+    <%= f.text_field :loyality_discount %> %
+  </div>
+  
+  <div class="field">
+    <%= f.label :loyality_discount_note %><br>
+    <%= f.text_area :loyality_discount_note %>
+  </div>
+  
+  <div class="field">
+    <label>Maximum term</label><br>
+    <a href="#label-loan-term">here...</a>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Type of loans refinanced?" %><br>
+    <%= f.select(:type_refinanced, [['private',1],['federal',1],['private and federal',1]] ) %>  
+  </div>
+  
+  <h4>Rates and Fees</h4>
+  
+  <div class="field">
+    <%= f.label :interest_rate_index %><br>
+    <%= f.text_field :interest_rate_index %> %
+  </div>
+  
+  <div class="field">
+    <%= f.label :interest_rate_index_note %><br>
+    <%= f.text_area :interest_rate_index_note %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :min_repayment_rate %><br>
+    <%= f.text_field :min_repayment_rate %> %
+  </div>
+  
+  <div class="field">
+    <%= f.label :min_repayment_rate_note %><br>
+    <%= f.text_area :min_repayment_rate_note %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :max_repayment_rate %><br>
+    <%= f.text_field :max_repayment_rate %> %
+  </div>
+  
+  <div class="field">
+    <%= f.label :max_repayment_rate_note %><br>
+    <%= f.text_area :max_repayment_rate_note %>
+  </div>
+
+  <div class="field">
+    <%= f.label :origination_fee %><br>
+    <%= f.text_field :origination_fee %> %
+  </div>
+  
+  <div class="field">
+    <%= f.label :early_repayment_penalty %><br>
+    <%= f.text_area :early_repayment_penalty %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  
+  <h4>Summary Page</h4>
+  
+  <div class="field">
+    <%= f.label :top_header %><br>
+    <%= f.text_area :top_header %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :extra_top_summary %><br>
+    <%= f.text_area :extra_top_summary %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :summary %><br>
+    <%= f.text_area :summary %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :disclosure %><br>
+    <%= f.text_field :disclosure %>
+  </div>
+  
+  <h2>Loan Requiments</h2>
 
   <% last_type = 0 %>
   <% @loan_attributes.each do |a| %>
@@ -26,16 +189,16 @@
     <div class="field">
       <% value = @loan_product.loan_product_attributes.find_by_loan_attribute_id(a.id) ? @loan_product_attributes.find_by_loan_attribute_id(a.id).value : "" %>
       <% if a.loan_attribute_type.field_type == LoanAttributeType::LOGIC %>
-        <%= a.label %>:<br>
+        <label id="label-<%= a.name %>"><%= a.label %></label>:<br>
         <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="1" <%= value == 1 ? "checked" : "" %> > <label>1</label> 
         <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="0" <%= value == 0 ? "checked" : "" %> > <label>0</label>
       <% end %>
       <% if a.loan_attribute_type.field_type == LoanAttributeType::NUMBER %>
-        <%= a.label %>:<br>
+        <label id="label-<%= a.name %>"><%= a.label %></label>:<br>
         <input type="text" name="loan_product_attributes[<%= a.id %>]" value="<%= value %>" />
       <% end %>
       <% if a.loan_attribute_type.field_type == LoanAttributeType::LOAN_TYPE %>
-        <%= a.label %>:<br>
+        <label id="label-<%= a.name %>"><%= a.label %></label>:<br>
         <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="1" <%= value == 1 ? "checked" : "" %> > <label>fixed</label> 
         <input type="radio" name="loan_product_attributes[<%= a.id %>]" value="2" <%= value == 2 ? "checked" : "" %> > <label>variable</label>
       <% end %>

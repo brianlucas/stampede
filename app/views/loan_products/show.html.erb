@@ -1,8 +1,199 @@
 <p id="notice"><%= notice %></p>
 
+<form method="get" action="">
+  <fieldset>
+    Use below field for calculate rates and total cost of loan<br/>
+    <label for="loan_size_calculate">Loan size</label>
+    <input type="text" name="loan_size" id="loan_size_calculate" value="<%=params[:loan_size]%>" />
+    <input type="submit" value="calculate">
+  </fieldset>
+</form>
+
+
 <p>
-  <strong>Code:</strong>
-  <%= @loan_product.code %>
+  <strong>Enabled:</strong>
+  <%= @loan_product.enabled == 1 ? "yes" : "no"  %>
+</p>
+
+<h2>General information</h2>
+
+<p>
+  <strong>Lender:</strong>
+  <%= @loan_product.loan_lender ? @loan_product.loan_lender.name : "not-set" %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @loan_product.slug %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @loan_product.name %>
+</p>
+
+<p>
+  <strong>Serviced by:</strong>
+  <%= @loan_product.loan_servicer ? @loan_product.loan_servicer.name : "not-set" %>
+</p>
+
+<p>
+  <strong>Logo:</strong>
+  <% if @loan_product.logo and @loan_product.logo.length > 0 %><img src="<%=@loan_product.logo%>" alt="" style="max-height: 200px" /><%else%>no logo<% end  %>
+</p>
+
+<p>
+  <strong>Co-signer release available:</strong>
+  <%= @loan_product.cosigner_release_available %>
+</p>
+
+<p>
+  <strong>Co-signer release note:</strong>
+  <%= @loan_product.cosigner_release_note %>
+</p>
+
+<p>
+  <strong>External url:</strong>
+<% if @loan_product.external_url and @loan_product.external_url.length > 0 %><a href="<%= @loan_product.external_url %>"><%= @loan_product.external_url %></a><% end  %>
+</p>
+
+<h2>Financial summary</h2>
+
+<p>
+  <strong>Interest rate type:</strong>
+  <%if @loan_product.get_loan_type == 1%>Fixed<%end%>
+  <%if @loan_product.get_loan_type == 2%>Variable<%end%>
+</p>
+
+<p>
+  <strong>APR min:</strong>
+  <%= @loan_product.get_apr_min %>%
+</p>
+
+<p>
+  <strong>APR max:</strong>
+  <%= @loan_product.get_apr_max %>%
+</p>
+
+<p>
+  <strong>Auto debit discount:</strong>
+  <%= @loan_product.auto_debit_discount %>%
+</p>
+
+<p>
+  <strong>Auto debit discount note:</strong>
+  <%= @loan_product.auto_debit_discount_note %>
+</p>
+
+<p>
+  <strong>Loyalty discount:</strong>
+  <%= @loan_product.loyality_discount %>%
+</p>
+
+<p>
+  <strong>Loyalty discount note:</strong>
+  <%= @loan_product.loyality_discount_note %>
+</p>
+
+<p>
+  <strong>Monthly payment min:</strong>
+  $<%= @loan_product.get_monthly_payment_min %>
+</p>
+
+<p>
+  <strong>Monthly payment max:</strong>
+  $<%= @loan_product.get_monthly_payment_max %>
+</p>
+
+<p>
+  <strong>Total cost min:</strong>
+  $<%= @loan_product.get_total_cost_min %>
+</p>
+
+<p>
+  $<strong>Total cost max:</strong>
+  $<%= @loan_product.get_total_cost_max %>
+</p>
+
+<p>
+  <strong>Maximum term:</strong>
+  <%= @loan_product.get_loan_term %> years
+</p>
+
+<p>
+  <strong>Type of loans refinanced?</strong>
+  <%if @loan_product.type_refinanced == 1%>Private<%end%>
+  <%if @loan_product.type_refinanced == 2%>Federal<%end%>
+  <%if @loan_product.type_refinanced == 3%>Private and federal<%end%>
+</p>
+
+<h2>Rates and Fees</h2>
+
+<p>
+  <strong>Interest rate index:</strong>
+  <%= @loan_product.interest_rate_index %>%
+</p>
+
+<p>
+  <strong>Interest rate index note:</strong>
+  <%= @loan_product.interest_rate_index_note %>
+</p>
+
+<p>
+  <strong>Min repayment rate:</strong>
+  <%= @loan_product.min_repayment_rate %>%
+</p>
+
+<p>
+  <strong>Min repayment rate note:</strong>
+  <%= @loan_product.min_repayment_rate_note %>
+</p>
+
+<p>
+  <strong>Max repayment rate:</strong>
+  <%= @loan_product.max_repayment_rate %>%
+</p>
+
+<p>
+  <strong>Max repayment rate note:</strong>
+  <%= @loan_product.max_repayment_rate_note %>
+</p>
+
+<p>
+  <strong>Origination fee:</strong>
+  <%= @loan_product.origination_fee %>%
+</p>
+
+<p>
+  <strong>Early repayment penalty:</strong>
+  <%= @loan_product.early_repayment_penalty %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @loan_product.notes %>
+</p>
+
+<h2>Summary page</h2>
+
+<p>
+  <strong>Top header:</strong>
+  <%= @loan_product.top_header %>
+</p>
+
+<p>
+  <strong>Extra top summary:</strong>
+  <%= @loan_product.extra_top_summary %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @loan_product.summary %>
+</p>
+
+<p>
+  <strong>Disclosure:</strong>
+  <%= @loan_product.disclosure %>
 </p>
 
 <hr>

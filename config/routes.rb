@@ -1,5 +1,9 @@
 Stampede::Application.routes.draw do
 
+  resources :loan_servicers
+
+  resources :loan_lenders
+
   root :to => 'home#index'
   get 'find' => 'home#find', as: :find_product
   post 'result' => 'home#result', as: :show_products
