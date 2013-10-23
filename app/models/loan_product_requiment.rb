@@ -92,6 +92,8 @@ class LoanProductRequiment
     # first check if all attributes exist (all attributes are set for this product)
     return false unless loan_product
     return false unless loan_product.loan_product_attributes.count == LoanAttribute.all.count
+    # check if product is enabled
+    return false unless loan_product.enabled == 1
     
     # check if graduate date is in past (if in the future then reject)
     return false if begin Date.parse(graduate_date) > Date.today rescue true end
