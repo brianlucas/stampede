@@ -115,12 +115,12 @@ class LoanProductRequiment
       # check if no conflict between degree_eligible and program eligible
       return false if (LoanAttributeType.find_by_name("degree-eligible-graduate").loan_attributes.map{|at| at.name}.include?(degree_eligible))
       # check limit for undergraduated
-      return false unless loan_size.to_i.between?(LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("minimum-undergraduate").id).value,LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("maximum-undergraduate").id).value )
+      return false unless loan_size.to_i.between?(LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("minimum-undergraduate").id).value+1,LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("maximum-undergraduate").id).value-1 )
     else
       # check if no conflict between degree_eligible and program eligible
       return false if (LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|at| at.name}.include?(degree_eligible))
       # check limit for undergraduated
-      return false unless loan_size.to_i.between?(LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("minimum-graduate").id).value,LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("maximum-graduate").id).value )
+      return false unless loan_size.to_i.between?(LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("minimum-graduate").id).value+1,LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("maximum-graduate").id).value-1 )
     end
     
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(residence_eligible).id).value == 1

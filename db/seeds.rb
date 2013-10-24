@@ -1863,7 +1863,7 @@ LoanProductAttribute.create([
     
     {loan_product_id: 6, loan_attribute_id: 139, value: 15},
         
-    {loan_product_id: 6, loan_attribute_id: 140, value: 2},
+    {loan_product_id: 6, loan_attribute_id: 140, value: 1},
     
     {loan_product_id: 6, loan_attribute_id: 141, value: 1},
     {loan_product_id: 6, loan_attribute_id: 142, value: 0},
