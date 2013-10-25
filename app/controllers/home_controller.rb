@@ -10,9 +10,9 @@ class HomeController < ApplicationController
   
   def result
     if params[:loan_attribs]
-      req = LoanProductRequiment.new(params[:loan_product][:code])
+      req = LoanProductRequiment.new(params[:loan_product][:slug])
       req.assign_attributes(params[:loan_attribs])
-      @product = params[:loan_product][:code]
+      @product = params[:loan_product][:slug]
       @result = req.result
     end
   end

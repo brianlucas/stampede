@@ -4,7 +4,7 @@
 
 <div class="filed">
   <label>Select product</label>
-  <%= select("loan_product", "code", @loan_products.map {|at| [ at[:code], at[:code] ] }, {include_blank: 'all products'}) %>  
+  <%= select("loan_product", "slug", @loan_products.map {|at| [ at[:slug], at[:slug] ] }, {include_blank: 'all products'}) %>  
 </div>
   
   <% @loan_attributes.each do |a| %>

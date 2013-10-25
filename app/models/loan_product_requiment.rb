@@ -1,6 +1,6 @@
 # Usage:
 # There is 2 ways use models
-# 1. when inicialize with Product Code, check only this product:
+# 1. when inicialize with Product Slug, check only this product:
 # 
 #  r = LoanProductRequiment.new("SFL-1")
 #  
@@ -16,7 +16,7 @@
 #  r.result
 #  => false
 #  
-#  2. when inicialize without Product Code, check all products in databases
+#  2. when inicialize without Product Slug, check all products in databases
 #  
 #  r = LoanProductRequiment.new
 #  
@@ -28,7 +28,7 @@
 #  r.program_eligible = "certificate"
 #  r.degree_eligible = "mba"
 #  
-#  # check if can get loan (return array of codes or false if cannot fit any)
+#  # check if can get loan (return array of slugs or false if cannot fit any)
 #  r.result
 #  => ["WEL-1"]
 #  
@@ -39,7 +39,7 @@ class LoanProductRequiment
   include ActiveModel::Model
   extend ActiveModel::Callbacks
   
-  attr_accessor :loan_product_code, :citizenship, :program_eligible, :degree_eligible, :credit_score, :loan_size, :residence_eligible, :age_requirement, :loan_term_and_type, :is_cosigner, :is_cosigner_citizen, :is_employed, :annual_income, :bankruptcy_last_5_years, :defaulted_loan, :school, :graduate_date
+  attr_accessor :loan_product_slug, :citizenship, :program_eligible, :degree_eligible, :credit_score, :loan_size, :residence_eligible, :age_requirement, :loan_term_and_type, :is_cosigner, :is_cosigner_citizen, :is_employed, :annual_income, :bankruptcy_last_5_years, :defaulted_loan, :school, :graduate_date
   
   validates :citizenship, :presence => true
   validates :program_eligible, :presence => true
@@ -67,16 +67,16 @@ class LoanProductRequiment
   end
   
   def initialize(*vars)    
-    @loan_product = LoanProduct.find_by_code(vars.first) if vars.first
+    @loan_product = LoanProduct.find_by_slug(vars.first) if vars.first
   end
   
   def result
     if validate_params 
       if @loan_product
-        check_attributes_for_product(@loan_product)        
+        check_attributes_for_product(@loan_product.slug)
       else
         products = []
-        LoanProduct.all.each {|p| products << p.code if check_attributes_for_product(p.code) }
+        LoanProduct.all.each {|p| products << p.slug if check_attributes_for_product(p.slug) }
         if products.count > 0
           products
         else
@@ -86,9 +86,9 @@ class LoanProductRequiment
     end
   end
   
-  def check_attributes_for_product (product_code)
+  def check_attributes_for_product (product_slug)
     # check if attributes have correct values (check in database if exist this attribute)
-    loan_product = LoanProduct.find_by_code(product_code)
+    loan_product = LoanProduct.find_by_slug(product_slug)
     # first check if all attributes exist (all attributes are set for this product)
     return false unless loan_product
     return false unless loan_product.loan_product_attributes.count == LoanAttribute.all.count

@@ -223,7 +223,6 @@ LoanServicer.create([
 
 LoanProduct.create([
     { id: 1, 
-      code: "SFL-1", 
       enabled: 1, 
       slug: "SFL_1",
       name: "SoFi Refinance loan",
@@ -252,8 +251,7 @@ LoanProduct.create([
       summary: "", 
       disclosure: ""
     },
-    { id: 2, 
-      code: "SFL-2", 
+    { id: 2,  
       enabled: 1, 
       slug: "SFL_2",
       name: "SoFi Refinance loan",
@@ -283,7 +281,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 3, 
-      code: "SFL-3", 
       enabled: 1, 
       slug: "SFL_3",
       name: "SoFi Refinance loan",
@@ -313,7 +310,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 4, 
-      code: "SFL-4", 
       enabled: 1, 
       slug: "SFL_4",
       name: "SoFi Refinance loan",
@@ -343,7 +339,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 5, 
-      code: "WEL-1", 
       enabled: 1, 
       slug: "WEL_1",
       name: "Wells Fargo Private ConsolidationSM Loan",
@@ -373,7 +368,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 6, 
-      code: "WEL-2",
       enabled: 1, 
       slug: "WEL_2",
       name: "Wells Fargo Private ConsolidationSM Loan",
@@ -403,7 +397,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 9, 
-      code: "COM-1",
       enabled: 1, 
       slug: "COM_2",
       name: "MBA Refinance Loan",
@@ -433,7 +426,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 10, 
-      code: "DRB-1",
       enabled: 1, 
       slug: "DRB_2",
       name: "DRB Refinance/Consolidation Student Loan",
@@ -463,7 +455,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 11, 
-      code: "DRB-2",
       enabled: 1, 
       slug: "DRB_2",
       name: "DRB Refinance/Consolidation Student Loan",
@@ -493,7 +484,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 12, 
-      code: "DRB-3",
       enabled: 1, 
       slug: "DRB_3",
       name: "DRB Refinance/Consolidation Student Loan",
@@ -523,7 +513,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 13, 
-      code: "DRB-4",
       enabled: 1, 
       slug: "DRB_4",
       name: "DRB Refinance/Consolidation Student Loan",
@@ -553,7 +542,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 14, 
-      code: "DRB-5",
       enabled: 1, 
       slug: "DRB_5",
       name: "DRB Refinance/Consolidation Student Loan",
@@ -583,7 +571,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 15, 
-      code: "SUN-1",
       enabled: 1, 
       slug: "SUN_1",
       name: "The SunTrust Private Student Loan",
@@ -613,7 +600,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 16,
-      code: "SUN-2",
       enabled: 1,
       slug: "SUN_2",
       name: "The SunTrust Private Student Loan",
@@ -643,7 +629,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 17,
-      code: "SUN-3",
       enabled: 1,
       slug: "SUN_3",
       name: "The SunTrust Private Student Loan",
@@ -673,7 +658,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 18,
-      code: "SUN-4",
       enabled: 1,
       slug: "SUN_4",
       name: "The SunTrust Private Student Loan",
@@ -703,7 +687,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 19,
-      code: "SUN-5",
       enabled: 1,
       slug: "SUN_5",
       name: "The SunTrust Private Student Loan",
@@ -733,7 +716,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 20,
-      code: "SUN-6",
       enabled: 1,
       slug: "SUN_6",
       name: "The SunTrust Private Student Loan",
@@ -763,7 +745,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 21,
-      code: "CUS-1",
       enabled: 1,
       slug: "CUS_1",
       name: "cuGrad Private Loan Consolidation Loan",
@@ -793,7 +774,6 @@ LoanProduct.create([
       disclosure: ""
     },
     { id: 22,
-      code: "CUS-2",
       enabled: 1,
       slug: "CUS_2",
       name: "cuGrad Private Loan Consolidation Loan",

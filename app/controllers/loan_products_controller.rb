@@ -79,7 +79,7 @@ class LoanProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_product_params
-      params.require(:loan_product).permit(:code)
+      params.require(:loan_product).permit(:slug)
     end
     
     def get_loan_attributes

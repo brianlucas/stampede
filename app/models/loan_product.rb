@@ -1,6 +1,6 @@
 # Usage:
 # 
-#  p = LoanProduct.find_by_code("SFL-1")
+#  p = LoanProduct.find_by_slug("SFL-1")
 #  
 #  # set loan size in dolars
 #  p.loan_size = 10000
@@ -13,7 +13,7 @@
 
 class LoanProduct < ActiveRecord::Base
   
-  validates :code, :presence => true
+  validates :slug, :presence => true
   
   has_many :loan_product_attributes
   has_many :loan_attributes, through: :loan_product_attributes
