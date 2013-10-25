@@ -63,7 +63,7 @@
   
   <div class="field">
     <%= f.label "Co-signer release note" %><br>
-    <%= f.text_area :cosigner_release_available %>
+    <%= f.text_area :cosigner_release_note %>
   </div>
 
   <div class="field">
@@ -105,7 +105,7 @@
   
   <div class="field">
     <%= f.label "Type of loans refinanced?" %><br>
-    <%= f.select(:type_refinanced, [['private',1],['federal',1],['private and federal',1]] ) %>  
+    <%= f.select(:type_refinanced, [['private',1],['federal',2],['private and federal',3]] ) %>  
   </div>
   
   <h4>Rates and Fees</h4>

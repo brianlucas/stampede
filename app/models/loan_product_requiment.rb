@@ -222,10 +222,10 @@ class LoanProductRequiment
            :name => "degree-eligible", 
            :label => "Degree Eligible",
            :filed_type => 1,
-           :attributes => at.loan_attributes.map{|a| {:id => a.id, :name => a.name, :label => a.label}} + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|a| {:id => a.id, :name => a.name, :label => a.label}}
+           :attributes => [:id => 0, :name => "Graduate", :label => "Graduate", :disabled => 1] + at.loan_attributes.map{|a| {:id => a.id, :name => a.name, :label => a.label, :disabled => 0}} + [:id => 0, :name => "Undergraduate", :label => "Undergraduate", :disabled => 1] + LoanAttributeType.find_by_name("degree-eligible-undergraduate").loan_attributes.map{|a| {:id => a.id, :name => a.name, :label => a.label, :disabled => 0}}
          }
        elsif at.name == "degree-eligible-undergraduate"
-         #do not enything, because its in above case
+         #do not enything, because its in above case+
        else
          @full_attributes << {
            :name => at.name, 

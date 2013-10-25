@@ -88,6 +88,6 @@ class LoanProductsController < ApplicationController
     end
     
     def loan_product_params
-      params.require(:loan_product).permit(:code, :enabled, :slug, :loan_lender_id, :loan_servicer_id, :logo, :cosigner_release_available, :cosigner_release_note, :external_url, :auto_debit_discount, :auto_debit_discount_note, :loyality_discount, :loyality_discount_note, :type_refinanced, :interest_rate_index, :interest_rate_index_note, :min_repayment_rate, :min_repayment_rate_note, :max_repayment_rate, :max_repayment_rate_note, :origination_fee, :early_repayment_penalty, :notes, :top_header, :extra_top_summary, :summary, :disclosure, :loan_size)
+      params.require(:loan_product).permit(:code, :name, :enabled, :slug, :loan_lender_id, :loan_servicer_id, :logo, :cosigner_release_available , :cosigner_release_note, :external_url, :auto_debit_discount, :auto_debit_discount_note, :loyality_discount, :loyality_discount_note, :type_refinanced, :interest_rate_index, :interest_rate_index_note, :min_repayment_rate, :min_repayment_rate_note, :max_repayment_rate, :max_repayment_rate_note, :origination_fee, :early_repayment_penalty, :notes, :top_header, :extra_top_summary, :summary, :disclosure, :loan_size)
     end
 end

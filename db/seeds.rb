@@ -10,10 +10,10 @@ LoanAttributeType.create([
     {id: 6, name: "eliminate-undergraduates", label: "Eliminate undergraduates", field_type: 1 },
     {id: 7, name: "loan-size", label: "Loan Size", field_type: 2 },
     {id: 8, name: "residence-eligible", label: "Residence input", field_type: 1 },
-    {id: 9, name: "age-requirement", label: "How old are you?", field_type: 2 },
+    {id: 9, name: "age-requirement", label: "Minimum age restriction by State", field_type: 2 },
     {id: 10, name: "loan-term", label: "Loan term", field_type: 2 },
     {id: 11, name: "loan-type", label: "Loan type", field_type: 3 },
-    {id: 12, name: "lender-specific-rules", label: "Include lander specific rule?", field_type: 1 },
+    {id: 12, name: "lender-specific-rules", label: "Include lender specific rule?", field_type: 1 },
     {id: 13, name: "is-cosigner", label: "Is there cosigner?", field_type: 4 },
     {id: 14, name: "is-cosigner-citizen", label: "Is cosigner US citizen?", field_type: 4 },
     {id: 15, name: "is-employed", label: "Are you employed?", field_type: 4 },
@@ -29,7 +29,7 @@ LoanAttributeType.create([
 LoanAttribute.create([
 
     { id: 1, name: 'citizen', label: 'US Citizen', loan_attribute_type_id: 1, unit: '' },
-    { id: 2, name: 'resident', label: 'Pernament Resident Alien', loan_attribute_type_id: 1, unit: '' },
+    { id: 2, name: 'resident', label: 'Permanent Resident Alien', loan_attribute_type_id: 1, unit: '' },
     { id: 3, name: 'non-resident', label: 'Non-resident Alien', loan_attribute_type_id: 1, unit: '' },
     { id: 4, name: 'citizenship-other', label: 'Other', loan_attribute_type_id: 1, unit: '' },
     
@@ -55,7 +55,7 @@ LoanAttribute.create([
     { id: 22, name: 'architecture', label: 'Architecture', loan_attribute_type_id: 4, unit: '' },
     { id: 23, name: 'aviation-science', label: 'Aviation Science', loan_attribute_type_id: 4, unit: '' },
     { id: 24, name: 'biological-sciences', label: 'Biological Sciences', loan_attribute_type_id: 4, unit: '' },
-    { id: 25, name: 'businnes', label: 'Businnes', loan_attribute_type_id: 4, unit: '' },
+    { id: 25, name: 'business', label: 'Business', loan_attribute_type_id: 4, unit: '' },
     { id: 26, name: 'cardiac-perfusion', label: 'Cardiac Perfusion', loan_attribute_type_id: 4, unit: '' },
     { id: 27, name: 'chemistry', label: 'Chemistry', loan_attribute_type_id: 4, unit: '' },
     { id: 28, name: 'chiropractic', label: 'Chiropractic', loan_attribute_type_id: 4, unit: '' },
@@ -187,7 +187,7 @@ LoanAttribute.create([
     { id: 146, name: 'minimum-loan-arizona-oregon', label: 'Minimum loan size in Arizona and Oregon', loan_attribute_type_id: 12, unit: '' },
     { id: 147, name: 'minimum-loan-iowa', label: 'Minimum loan size in Iowa', loan_attribute_type_id: 12, unit: '' },
     
-    { id: 148, name: 'annual-income-limit', label: "Income limit for rule", loan_attribute_type_id: 16, unit: '$' },
+    { id: 148, name: 'annual-income-limit', label: "Minimum income requirement", loan_attribute_type_id: 16, unit: '$' },
     
     { id: 149, name: 'minimum-loan-size-arizona', label: "Minimum loan size in Arizona", loan_attribute_type_id: 16, unit: '$' },
     { id: 150, name: 'minimum-loan-size-oregon', label: "Minimum loan size in Oregon", loan_attribute_type_id: 16, unit: '$' },

@@ -25,8 +25,17 @@
             <%= radio_button_tag("loan_attribs["+a[:name].gsub("-","_")+"]", "no") %>
             <%= label_tag(:age_no, "no") %>
         <% else %>
-          <label><%= a[:label] %></label>
-          <%= select("loan_attribs", a[:name].gsub("-","_"), a[:attributes].map {|at| [ at[:label], at[:name] ] }) %>  
+          <% unless a[:name] == "degree-eligible" %>
+            <label><%= a[:label] %></label>
+            <%= select("loan_attribs", a[:name].gsub("-","_"), a[:attributes].map {|at| [ at[:label], at[:name] ] }) %>  
+          <% else %>
+            <label><%= a[:label] %></label>
+            <select id="loan_attribs_degree_eligible" name="loan_attribs[degree_eligible]">
+              <% a[:attributes].each do |at| %>
+              <option value="<%=at[:id]%>" <%if at[:disabled] == 1%>disabled="disabled" style="font-style: italic"<%end%>><%unless at[:disabled] == 1%>&nbsp;&nbsp;<%end%><%=at[:label]%></option>
+              <% end %>
+            </select>
+          <% end %>
         <% end %>
       </div>
     <% end %>
