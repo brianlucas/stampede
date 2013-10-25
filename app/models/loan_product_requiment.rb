@@ -98,7 +98,6 @@ class LoanProductRequiment
     # check if graduate date is in past (if in the future then reject)
     return false if begin Date.parse(graduate_date) > Date.today rescue true end
       
-    return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(citizenship).id).value == 1
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(program_eligible).id).value == 1
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(degree_eligible).id).value == 1
     return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(school).id).value == 1
@@ -149,8 +148,15 @@ class LoanProductRequiment
     end
     
     # lander specific rules
-    # rule: Co-signer citizenship must be US citizen
-    return false if (LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("cosigner-citizenship").id).value == 1 and citizenship == "resident" and is_cosigner_citizen == "no")
+    # rule: Co-signer citizenship must be US citizen, other case just simple check citizenship avaibility
+    if (LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("cosigner-citizenship").id).value == 1 and (citizenship == "non-resident" or citizenship == "citizenship-other"))
+      return false if is_cosigner_citizen == "no"
+    else
+      return false unless LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name(citizenship).id).value == 1
+    end 
+    
+    
+    
     # rule: Employment required
     return false if (LoanProductAttribute.find_by_loan_product_id_and_loan_attribute_id(loan_product.id, LoanAttribute.find_by_name("employment-required").id).value == 1 and is_employed == "no")
     # rule: Annual income above $24000 or co-signer required

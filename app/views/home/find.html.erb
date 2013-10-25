@@ -32,7 +32,7 @@
             <label><%= a[:label] %></label>
             <select id="loan_attribs_degree_eligible" name="loan_attribs[degree_eligible]">
               <% a[:attributes].each do |at| %>
-              <option value="<%=at[:id]%>" <%if at[:disabled] == 1%>disabled="disabled" style="font-style: italic"<%end%>><%unless at[:disabled] == 1%>&nbsp;&nbsp;<%end%><%=at[:label]%></option>
+              <option value="<%=at[:name]%>" <%if at[:disabled] == 1%>disabled="disabled" style="font-style: italic"<%end%>><%unless at[:disabled] == 1%>&nbsp;&nbsp;<%end%><%=at[:label]%></option>
               <% end %>
             </select>
           <% end %>
