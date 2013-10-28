@@ -7,7 +7,7 @@ LoanAttributeType.create([
     {id: 3, name: "degree-eligible-graduate", label: "Undergraduate or graduate degree?", field_type: 1 },
     {id: 4, name: "degree-eligible-undergraduate", label: "Undergraduate or graduate degree?", field_type: 1 },
     {id: 5, name: "credit-score", label: "Credit score", field_type: 2 },
-    {id: 6, name: "eliminate-undergraduates", label: "Eliminate undergraduates", field_type: 1 },
+    {id: 6, name: "eliminate-undergraduates", label: "Graduate vs undergraduate", field_type: 1 },
     {id: 7, name: "loan-size", label: "Loan Size", field_type: 2 },
     {id: 8, name: "residence-eligible", label: "Residence input", field_type: 1 },
     {id: 9, name: "age-requirement", label: "Minimum age restriction by State", field_type: 2 },
@@ -23,7 +23,6 @@ LoanAttributeType.create([
     {id: 19, name: "minimum-loan-by-states", label: "Minimum loan by states", field_type: 2 },
     {id: 20, name: "school", label: "Your school", field_type: 1 },
     {id: 21, name: "graduate-date", label: "Graduate date (format: YYYY-MM-DD)", field_type: 2 },
-   
 ])
 
 LoanAttribute.create([
@@ -189,9 +188,9 @@ LoanAttribute.create([
     
     { id: 148, name: 'annual-income-limit', label: "Minimum income requirement", loan_attribute_type_id: 16, unit: '$' },
     
-    { id: 149, name: 'minimum-loan-size-arizona', label: "Minimum loan size in Arizona", loan_attribute_type_id: 16, unit: '$' },
-    { id: 150, name: 'minimum-loan-size-oregon', label: "Minimum loan size in Oregon", loan_attribute_type_id: 16, unit: '$' },
-    { id: 151, name: 'minimum-loan-size-iowa', label: "Minimum loan size in Iowa", loan_attribute_type_id: 16, unit: '$' },
+    { id: 149, name: 'minimum-loan-size-arizona', label: "Minimum loan size in Arizona", loan_attribute_type_id: 19, unit: '$' },
+    { id: 150, name: 'minimum-loan-size-oregon', label: "Minimum loan size in Oregon", loan_attribute_type_id: 19, unit: '$' },
+    { id: 151, name: 'minimum-loan-size-iowa', label: "Minimum loan size in Iowa", loan_attribute_type_id: 19, unit: '$' },
     
     { id: 152, name: '121150-1', label: "Harvard University", loan_attribute_type_id: 20, unit: '' },
     { id: 153, name: '107363-1', label: "University of Colorado, Boulder", loan_attribute_type_id: 20, unit: '' },

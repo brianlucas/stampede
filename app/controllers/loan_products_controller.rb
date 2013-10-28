@@ -33,8 +33,21 @@ class LoanProductsController < ApplicationController
     respond_to do |format|
       if @loan_product.save
         # save attributes for product
-        params[:loan_product_attributes].each{|attribute_id, value| LoanProductAttribute.find_or_create_by_loan_product_id_and_loan_attribute_id(@loan_product.id,attribute_id).update_attribute("value",value)}
-                
+        loan_product_attributes_multibox_selected =  params[:loan_product_attributes_multibox] ? params[:loan_product_attributes_multibox].values.flatten : []  
+        loan_product_attributes = {}
+        
+        LoanAttribute.all.map{|a| a.id}.each do |attr_id|
+          if loan_product_attributes_multibox_selected.include?(attr_id.to_s)
+            loan_product_attributes[attr_id.to_s] = 1
+          elsif params[:loan_product_attributes].has_key?(attr_id.to_s)
+            loan_product_attributes[attr_id.to_s] = params[:loan_product_attributes][attr_id.to_s]
+          else
+            loan_product_attributes[attr_id.to_s] = 0
+          end
+        end
+        
+        loan_product_attributes.each{|attribute_id, value| LoanProductAttribute.find_or_create_by_loan_product_id_and_loan_attribute_id(@loan_product.id,attribute_id).update_attribute("value",value)}               
+
         format.html { redirect_to @loan_product, notice: 'Loan product was successfully created.' }
         format.json { render action: 'show', status: :created, location: @loan_product }
       else
@@ -49,9 +62,23 @@ class LoanProductsController < ApplicationController
   def update
     respond_to do |format|
       if @loan_product.update(loan_product_params)
-        # save attributes for product
-        params[:loan_product_attributes].each{|attribute_id, value| LoanProductAttribute.find_or_create_by_loan_product_id_and_loan_attribute_id(@loan_product.id,attribute_id).update_attribute("value",value)}
         
+        # save attributes for product
+        loan_product_attributes_multibox_selected =  params[:loan_product_attributes_multibox].values.flatten   
+        loan_product_attributes = {}
+        
+        LoanAttribute.all.map{|a| a.id}.each do |attr_id|
+          if loan_product_attributes_multibox_selected.include?(attr_id.to_s)
+            loan_product_attributes[attr_id.to_s] = 1
+          elsif params[:loan_product_attributes].has_key?(attr_id.to_s)
+            loan_product_attributes[attr_id.to_s] = params[:loan_product_attributes][attr_id.to_s]
+          else
+            loan_product_attributes[attr_id.to_s] = 0
+          end
+        end
+        
+        loan_product_attributes.each{|attribute_id, value| LoanProductAttribute.find_or_create_by_loan_product_id_and_loan_attribute_id(@loan_product.id,attribute_id).update_attribute("value",value)}
+                
         format.html { redirect_to @loan_product, notice: 'Loan product was successfully updated.' }
         format.json { head :no_content }
       else
